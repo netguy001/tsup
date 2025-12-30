@@ -173,12 +173,13 @@
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 20px);
             color: var(--text-light);
             margin-bottom: 40px;
             max-width: 680px;
             margin-left: auto;
             margin-right: auto;
+            line-height: 1.6;
         }
 
         .btn {
@@ -196,7 +197,7 @@
         }
 
         .btn:hover {
-            background: var(--primary-dark);
+            background: #1D4ED8;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
@@ -234,8 +235,9 @@
         }
 
         .section-header p {
-            font-size: 18px;
+            font-size: clamp(16px, 3vw, 18px);
             color: var(--text-light);
+            line-height: 1.6;
         }
 
         .grid {
@@ -299,14 +301,15 @@
         }
 
         .card h3 {
-            font-size: 20px;
+            font-size: clamp(18px, 3vw, 20px);
             margin-bottom: 12px;
         }
 
         .card p {
             color: var(--text-light);
             margin-bottom: 20px;
-            font-size: 15px;
+            font-size: clamp(14px, 2.5vw, 15px);
+            line-height: 1.6;
         }
 
         .card a {
@@ -336,13 +339,6 @@
         }
 
         .features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 40px;
-            margin-bottom: 80px;
-        }
-
-        .features {
             display: flex;
             flex-direction: column;
             gap: 60px;
@@ -369,7 +365,7 @@
             display: grid;
             grid-template-columns: 1fr auto 1fr;
             gap: 40px;
-            align-items: center;
+            align-items: start;
             position: relative;
         }
 
@@ -428,40 +424,15 @@
             height: 1px;
         }
 
-        @media (max-width: 768px) {
-            .features::before {
-                left: 24px;
-            }
-
-            .feature {
-                grid-template-columns: auto 1fr;
-                gap: 20px;
-            }
-
-            .feature:nth-child(odd) .feature-content,
-            .feature:nth-child(even) .feature-content {
-                grid-column: 2;
-                text-align: left;
-            }
-
-            .feature:nth-child(odd) .feature-number,
-            .feature:nth-child(even) .feature-number {
-                grid-column: 1;
-            }
-
-            .feature-empty {
-                display: none;
-            }
-        }
-
         .feature h3 {
-            font-size: 18px;
+            font-size: clamp(16px, 3vw, 18px);
             margin-bottom: 10px;
         }
 
         .feature p {
             color: var(--text-light);
-            font-size: 15px;
+            font-size: clamp(14px, 2.5vw, 15px);
+            line-height: 1.6;
         }
 
         .stats {
@@ -487,7 +458,7 @@
         }
 
         .stat h4 {
-            font-size: 56px;
+            font-size: clamp(40px, 8vw, 56px);
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -498,7 +469,7 @@
 
         .stat p {
             color: var(--text-light);
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 16px);
         }
 
         /* CTA */
@@ -542,9 +513,10 @@
         }
 
         .cta p {
-            font-size: 20px;
+            font-size: clamp(16px, 3vw, 20px);
             margin-bottom: 32px;
             opacity: 0.95;
+            line-height: 1.5;
         }
 
         .cta .btn {
@@ -647,9 +619,45 @@
             }
 
             .grid,
-            .features,
             .stats {
                 grid-template-columns: 1fr;
+            }
+
+            /* DISABLE TIMELINE LAYOUT ON MOBILE */
+            .features {
+                display: block;
+                gap: 0;
+                margin-bottom: 60px;
+                position: static;
+            }
+
+            .features::before {
+                display: none;
+            }
+
+            .feature {
+                display: block;
+                position: relative;
+                margin-bottom: 24px;
+            }
+
+            .feature-number {
+                position: absolute;
+                top: 24px;
+                right: 24px;
+                width: 40px;
+                height: 40px;
+                font-size: 14px;
+                margin: 0;
+            }
+
+            .feature-content {
+                padding: 24px 70px 24px 24px;
+                text-align: left;
+            }
+
+            .feature-empty {
+                display: none;
             }
 
             .footer-grid {
@@ -685,12 +693,13 @@
         <section class="hero">
             <div class="container">
                 <div class="hero-content">
-                    <div class="hero-badge">Enterprise infrastructure solutions</div>
-                    <h1>Infrastructure for companies<br>that need to <span class="gradient-text">scale</span></h1>
-                    <p>We build the technology foundations that power growth—from intelligent automation to cloud
-                        infrastructure, designed for reliability at any scale.</p>
+                    <div class="hero-badge">Engineering-led infrastructure solutions</div>
+                    <h1>Technology that removes <span class="gradient-text">complexity</span></h1>
+                    <p>We build systems that let you focus on your business instead of firefighting infrastructure. From
+                        AI automation to cloud operations, our solutions are designed for teams that need things to
+                        work.</p>
                     <a href="contact.html" class="btn">
-                        Start building
+                        Start a conversation
                         <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M6 3l5 5-5 5" />
                         </svg>
@@ -702,10 +711,9 @@
         <section>
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">Core capabilities</span>
-                    <h2>Technology solutions that remove complexity</h2>
-                    <p>From automation to infrastructure, we build systems that let you focus on your business, not your
-                        stack.</p>
+                    <span class="section-label">What we do</span>
+                    <h2>Six capabilities, one team</h2>
+                    <p>Technical solutions built to solve actual operational problems.</p>
                 </div>
                 <div class="grid">
                     <div class="card">
@@ -713,9 +721,9 @@
                             <img src="assets/img/1.png" alt="AI">
                         </div>
                         <h3>AI Automation</h3>
-                        <p>Deploy intelligent workflows that eliminate manual processes and reduce operational overhead
-                            across your organization.</p>
-                        <a href="services/ai-automation.html">
+                        <p>Eliminate repetitive work with intelligent workflows that handle document processing, data
+                            extraction, and decision support.</p>
+                        <a href="services.html#ai-automation">
                             Learn more
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
@@ -727,9 +735,9 @@
                             <img src="assets/img/2.png" alt="API">
                         </div>
                         <h3>API Integration</h3>
-                        <p>Connect disparate systems with reliable, scalable integrations built on enterprise-grade API
-                            architecture.</p>
-                        <a href="services/api-integration.html">
+                        <p>Connect your tools with integrations that work, handling authentication, rate limits, and
+                            data transformation properly.</p>
+                        <a href="services.html#api-integration">
                             Learn more
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
@@ -741,9 +749,9 @@
                             <img src="assets/img/3.png" alt="Cloud">
                         </div>
                         <h3>Cloud & DevOps</h3>
-                        <p>Design and operate infrastructure that handles growth without increasing complexity or
-                            maintenance burden.</p>
-                        <a href="services/cloud-devops.html">
+                        <p>Infrastructure that grows with you, built with automation and monitoring so your team isn't
+                            constantly putting out fires.</p>
+                        <a href="services.html#cloud-devops">
                             Learn more
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
@@ -755,9 +763,9 @@
                             <img src="assets/img/4.png" alt="Performance">
                         </div>
                         <h3>Performance Optimization</h3>
-                        <p>Reduce cloud spend and improve system performance through architectural improvements and
-                            resource efficiency.</p>
-                        <a href="services/performance-cost.html">
+                        <p>Make systems faster and cheaper by identifying bottlenecks and fixing architectural
+                            inefficiencies.</p>
+                        <a href="services.html#performance">
                             Learn more
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
@@ -769,9 +777,9 @@
                             <img src="assets/img/5.png" alt="UI/UX">
                         </div>
                         <h3>UI/UX & Branding</h3>
-                        <p>Design interfaces that users understand immediately and brands that communicate value clearly
-                            and consistently.</p>
-                        <a href="services/ui-ux-branding.html">
+                        <p>Interfaces users actually understand, designed to reduce support load and improve adoption.
+                        </p>
+                        <a href="services.html#ui-ux">
                             Learn more
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
@@ -783,9 +791,9 @@
                             <img src="assets/img/6.png" alt="Web">
                         </div>
                         <h3>Web Development</h3>
-                        <p>Build applications with clean architecture that's maintainable and performant as your team
-                            and user base grows.</p>
-                        <a href="services/web-development.html">
+                        <p>Applications built with maintainable code and proper architecture, not shortcuts that create
+                            technical debt.</p>
+                        <a href="services.html#web-dev">
                             Learn more
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
@@ -799,16 +807,17 @@
         <section class="why-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">Our approach</span>
-                    <h2>Engineering principles that scale</h2>
-                    <p>We work with businesses that need technology they can depend on as they grow.</p>
+                    <span class="section-label">Why Techscale</span>
+                    <h2>How we're different</h2>
+                    <p>Most infrastructure work is reactive. We design systems that prevent problems instead of creating
+                        them.</p>
                 </div>
                 <div class="features">
                     <div class="feature">
                         <div class="feature-content">
-                            <h3>Architecture first</h3>
-                            <p>We prioritize robust system design over quick fixes, building foundations that support
-                                long-term growth.</p>
+                            <h3>We don't build prototypes</h3>
+                            <p>Everything we ship is production-grade from day one. Proper error handling, monitoring,
+                                documentation, and security aren't optional steps—they're baseline requirements.</p>
                         </div>
                         <div class="feature-number">01</div>
                         <div class="feature-empty"></div>
@@ -817,16 +826,16 @@
                         <div class="feature-empty"></div>
                         <div class="feature-number">02</div>
                         <div class="feature-content">
-                            <h3>Security by default</h3>
-                            <p>Enterprise-grade security practices are integrated into every solution from day one, not
-                                added later.</p>
+                            <h3>We optimize for maintainability</h3>
+                            <p>Quick fixes compound into technical debt. We write code that your team can actually work
+                                with six months later, with clear architecture and understandable patterns.</p>
                         </div>
                     </div>
                     <div class="feature">
                         <div class="feature-content">
-                            <h3>Battle-tested patterns</h3>
-                            <p>Infrastructure approaches proven across industries, from early-stage startups to
-                                enterprise scale.</p>
+                            <h3>We measure outcomes, not activity</h3>
+                            <p>Success means measurable improvements: reduced costs, faster response times, fewer
+                                incidents. We track what matters to your operations, not vanity metrics.</p>
                         </div>
                         <div class="feature-number">03</div>
                         <div class="feature-empty"></div>
@@ -835,24 +844,24 @@
                         <div class="feature-empty"></div>
                         <div class="feature-number">04</div>
                         <div class="feature-content">
-                            <h3>Measurable outcomes</h3>
-                            <p>Success measured by operational improvements, system reliability, and tangible business
-                                impact.</p>
+                            <h3>We explain technical decisions</h3>
+                            <p>No jargon, no overpromising. We tell you what we're building, why it matters, and what
+                                the tradeoffs are. You should understand what you're paying for.</p>
                         </div>
                     </div>
                 </div>
                 <div class="stats">
                     <div class="stat">
-                        <h4>99.9%</h4>
-                        <p>Uptime SLA</p>
+                        <h4>18+</h4>
+                        <p>Active clients</p>
                     </div>
                     <div class="stat">
-                        <h4>50+</h4>
-                        <p>Enterprise clients</p>
+                        <h4>99.8%</h4>
+                        <p>Average uptime</p>
                     </div>
                     <div class="stat">
-                        <h4>24/7</h4>
-                        <p>Support available</p>
+                        <h4>3 years</h4>
+                        <p>Average engagement</p>
                     </div>
                 </div>
             </div>
@@ -860,8 +869,8 @@
 
         <section class="cta">
             <div class="container">
-                <h2>Ready to build infrastructure that scales?</h2>
-                <p>Let's discuss how we can support your growth with technology that works.</p>
+                <h2>Let's talk about your infrastructure</h2>
+                <p>Tell us what you're building, and we'll figure out if we can help.</p>
                 <a href="contact.html" class="btn">
                     Get in touch
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -877,18 +886,18 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h4>Techscale</h4>
-                    <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
-                        scale.</p>
+                    <p>Scale Without Limits.<br><br>Engineering solutions for teams that need infrastructure to work,
+                        not just exist.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="services/ai-automation.html">AI Automation</a></li>
-                        <li><a href="services/api-integration.html">API Integration</a></li>
-                        <li><a href="services/cloud-devops.html">Cloud & DevOps</a></li>
-                        <li><a href="services/performance-cost.html">Performance & Cost</a></li>
-                        <li><a href="services/ui-ux-branding.html">UI/UX & Branding</a></li>
-                        <li><a href="services/web-development.html">Web Development</a></li>
+                        <li><a href="services.html#ai-automation">AI Automation</a></li>
+                        <li><a href="services.html#api-integration">API Integration</a></li>
+                        <li><a href="services.html#cloud-devops">Cloud & DevOps</a></li>
+                        <li><a href="services.html#performance">Performance & Cost</a></li>
+                        <li><a href="services.html#ui-ux">UI/UX & Branding</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">

@@ -84,63 +84,116 @@
         }
 
         .hero {
-            padding: 180px 0 100px;
+            padding: clamp(140px, 20vw, 180px) 0 clamp(60px, 10vw, 80px);
             text-align: center;
             background: var(--bg-light);
             border-bottom: 1px solid var(--border);
         }
 
         .hero h1 {
-            font-size: clamp(48px, 6vw, 64px);
+            font-size: clamp(42px, 6vw, 56px);
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: clamp(16px, 3vw, 20px);
             letter-spacing: -0.02em;
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: clamp(16px, 2.5vw, 18px);
             color: var(--text-light);
-            max-width: 600px;
+            max-width: 700px;
             margin: 0 auto;
+            line-height: 1.6;
         }
 
         .products {
-            padding: 120px 0;
+            padding: clamp(80px, 12vw, 100px) 0;
         }
 
         .product {
-            max-width: 900px;
-            margin: 0 auto 100px;
-            padding: 64px;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            transition: all 0.3s;
+            margin: 0 auto clamp(60px, 10vw, 80px);
+            padding: 0;
+            background: transparent;
+            border: none;
+            border-radius: 0;
+            transition: none;
         }
 
         .product:hover {
-            border-color: var(--primary);
-            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.12);
+            border-color: transparent;
+            box-shadow: none;
         }
 
         .product:last-child {
             margin-bottom: 0;
         }
 
+        .product-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(40px, 8vw, 60px);
+            align-items: start;
+            padding: clamp(40px, 8vw, 60px) 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .product:last-child .product-grid {
+            border-bottom: none;
+        }
+
+        .product-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 100px;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
         .product-header {
             display: flex;
             align-items: center;
             gap: 16px;
-            margin-bottom: 24px;
+            margin-bottom: clamp(12px, 2vw, 16px);
+        }
+
+        .product-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .product-icon img {
+            width: 28px;
+            height: 28px;
+            object-fit: contain;
+        }
+
+        .product-title-group {
+            flex: 1;
         }
 
         .product-header h2 {
-            font-size: 36px;
+            font-size: clamp(28px, 5vw, 36px);
             font-weight: 700;
             letter-spacing: -0.01em;
+            margin-bottom: 6px;
         }
 
         .status-badge {
+            display: inline-block;
             padding: 6px 14px;
             background: var(--bg-light);
             border: 1px solid var(--border);
@@ -153,21 +206,39 @@
         }
 
         .product-description {
-            font-size: 18px;
-            color: var(--text-light);
-            margin-bottom: 32px;
+            font-size: clamp(16px, 2.5vw, 18px);
+            color: var(--text);
+            margin-bottom: clamp(20px, 3vw, 28px);
             line-height: 1.7;
+        }
+
+        .section-label {
+            display: block;
+            font-size: clamp(11px, 2vw, 12px);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-top: clamp(20px, 3vw, 24px);
+            margin-bottom: clamp(8px, 1.5vw, 12px);
+        }
+
+        .product-content p {
+            font-size: clamp(14px, 2.5vw, 15px);
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: clamp(12px, 2vw, 16px);
         }
 
         .features {
             list-style: none;
-            margin-bottom: 40px;
+            margin-bottom: clamp(16px, 3vw, 24px);
         }
 
         .features li {
-            font-size: 16px;
+            font-size: clamp(14px, 2.5vw, 15px);
             color: var(--text);
-            padding: 12px 0;
+            padding: clamp(8px, 1.5vw, 10px) 0;
             border-bottom: 1px solid var(--border);
             line-height: 1.6;
         }
@@ -183,17 +254,50 @@
             margin-right: 12px;
         }
 
+        .use-cases {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(8px, 2vw, 12px);
+            margin-bottom: clamp(16px, 3vw, 24px);
+        }
+
+        .use-case {
+            font-size: clamp(13px, 2vw, 14px);
+            color: var(--text-light);
+            padding: clamp(10px, 2vw, 12px) clamp(12px, 2.5vw, 16px);
+            background: var(--bg-light);
+            border-radius: 8px;
+            line-height: 1.5;
+        }
+
+        .compliance-note {
+            background: rgba(37, 99, 235, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 20px);
+            margin: clamp(16px, 3vw, 24px) 0;
+            border-radius: 4px;
+            font-size: clamp(14px, 2vw, 15px);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .cta-group {
+            display: flex;
+            gap: clamp(12px, 2vw, 16px);
+            margin-top: clamp(20px, 3vw, 32px);
+        }
+
         .cta-btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 14px 28px;
+            padding: clamp(12px, 2vw, 14px) clamp(20px, 3vw, 28px);
             background: var(--primary);
             color: white;
             text-decoration: none;
             border-radius: 8px;
             font-weight: 600;
-            font-size: 15px;
+            font-size: clamp(14px, 2vw, 15px);
             transition: all 0.3s;
             border: none;
             cursor: pointer;
@@ -205,9 +309,27 @@
             box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
         }
 
+        .cta-btn.secondary {
+            background: var(--bg);
+            color: var(--primary);
+            border: 1px solid var(--border);
+        }
+
+        .cta-btn.secondary:hover {
+            background: var(--bg-light);
+            border-color: var(--primary);
+        }
+
         .cta-btn svg {
             width: 14px;
             height: 14px;
+        }
+
+        .access-note {
+            font-size: clamp(13px, 2vw, 14px);
+            color: var(--text-light);
+            margin-top: clamp(12px, 2vw, 16px);
+            font-style: italic;
         }
 
         footer {
@@ -291,26 +413,33 @@
                 display: block;
             }
 
-            .hero {
-                padding: 140px 0 80px;
-            }
-
-            .products {
-                padding: 60px 0;
-            }
-
-            .product {
-                padding: 40px 24px;
-                margin-bottom: 60px;
-            }
-
-            .product-header {
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: clamp(24px, 5vw, 32px);
+                display: flex;
                 flex-direction: column;
-                align-items: flex-start;
             }
 
-            .product-header h2 {
-                font-size: 28px;
+            .product-grid .product-image {
+                order: -1;
+            }
+
+            .product-grid .product-text {
+                order: 1;
+            }
+
+            .product-image {
+                height: auto;
+                aspect-ratio: 4/3;
+                position: static;
+            }
+
+            .use-cases {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-group {
+                flex-direction: column;
             }
 
             .footer-grid {
@@ -331,7 +460,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="pricing.html" class="active">Products</a></li>
+                <li><a href="products.html" class="active">Products</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -342,57 +471,156 @@
         <section class="hero">
             <div class="container">
                 <h1>Products</h1>
-                <p>Internal tools built for security, intelligence, and infrastructure automation. Available to select
-                    clients.</p>
+                <p>Internal tools built for security, intelligence, and infrastructure automation. Access is restricted
+                    and approval-based.</p>
             </div>
         </section>
 
         <section class="products">
             <div class="container">
+                <!-- LockBox -->
                 <div class="product">
-                    <div class="product-header">
-                        <h2>LockBox</h2>
-                        <span class="status-badge">Private Beta</span>
+                    <div class="product-grid">
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1614064641938-3bbee52942c7?w=800&q=80"
+                                alt="Secure vault system" loading="lazy">
+                        </div>
+                        <div class="product-text">
+                            <div class="product-header">
+                                <div class="product-icon">
+                                    <img src="assets/icons/lockbox.svg" alt="LockBox"
+                                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2228%22 height=%2228%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%232563EB%22 stroke-width=%222%22%3E%3Crect x=%223%22 y=%2211%22 width=%2218%22 height=%2211%22 rx=%222%22/%3E%3Cpath d=%22M7 11V7a5 5 0 0 1 10 0v4%22/%3E%3C/svg%3E'">
+                                </div>
+                                <div class="product-title-group">
+                                    <h2>LockBox</h2>
+                                    <span class="status-badge">In Development</span>
+                                </div>
+                            </div>
+
+                            <p class="product-description">
+                                A secure vault system for managing passwords, API keys, tokens, secrets, files, folders,
+                                and sensitive configuration data. Uses specialized high-level encryption that protects
+                                against unauthorized access, including malware.
+                            </p>
+
+                            <div class="product-content">
+                                <span class="section-label">What it does</span>
+                                <p>LockBox provides centralized, encrypted storage for all types of credentials, files,
+                                    folders, and sensitive data. Anything stored in LockBox is encrypted with
+                                    specialized high-level cryptography that only LockBox can decrypt. Even if malware
+                                    accesses files inside LockBox, they remain completely secure and unreadable.</p>
+
+                                <span class="section-label">How it works</span>
+                                <p>Everything stored in LockBox—passwords, files, folders, documents—is encrypted using
+                                    specialized cryptographic algorithms before being written to storage. Data remains
+                                    encrypted at rest and is only decrypted at runtime when an authenticated and
+                                    authorized request is made through LockBox itself. No plain-text secrets or files
+                                    are ever stored on disk.</p>
+
+                                <span class="section-label">Key capabilities</span>
+                                <ul class="features">
+                                    <li>Encrypts and secures passwords, API keys, SSH keys, certificates, files, and
+                                        folders</li>
+                                    <li>Specialized high-level encryption that only LockBox can decrypt</li>
+                                    <li>Protection against malware—encrypted files remain secure even if accessed</li>
+                                    <li>Granular access controls with role-based permissions</li>
+                                    <li>Auto-locking and clipboard protection for enhanced security</li>
+                                    <li>Offline-first architecture with local data sovereignty</li>
+                                </ul>
+
+                                <div class="compliance-note">
+                                    <strong>Status:</strong> Currently in development. Available to approved clients for
+                                    evaluation. Demo or base version provided after approval.
+                                </div>
+
+                                <div class="cta-group">
+                                    <button class="cta-btn" onclick="requestAccess('LockBox')">
+                                        Request access
+                                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M6 3l5 5-5 5" />
+                                        </svg>
+                                    </button>
+                                    <button class="cta-btn secondary" onclick="requestDemo('LockBox')">
+                                        Request demo
+                                    </button>
+                                </div>
+                                <p class="access-note">Access requires approval. Contact us to discuss your use case.
+                                </p>
+                            </div>
+                        </div>
                     </div>
-                    <p class="product-description">
-                        A secure vault for passwords, API keys, secrets, SSH keys, and encrypted files. Built for teams
-                        that need enterprise-grade security without complexity.
-                    </p>
-                    <ul class="features">
-                        <li>Strong encryption with auto-locking and clipboard protection</li>
-                        <li>Offline-first architecture with local data sovereignty</li>
-                        <li>Manage credentials, SSH keys, certificates, and encrypted documents</li>
-                        <li>Zero-knowledge design with granular access controls</li>
-                    </ul>
-                    <button class="cta-btn" onclick="requestAccess('LockBox')">
-                        Request access
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M6 3l5 5-5 5" />
-                        </svg>
-                    </button>
                 </div>
 
+                <!-- Scrapify -->
                 <div class="product">
-                    <div class="product-header">
-                        <h2>Scrapify</h2>
-                        <span class="status-badge">Request Access</span>
+                    <div class="product-grid">
+                        <div class="product-text">
+                            <div class="product-header">
+                                <div class="product-icon">
+                                    <img src="assets/icons/scrapify.svg" alt="Scrapify"
+                                        onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2228%22 height=%2228%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%230EA5E9%22 stroke-width=%222%22%3E%3Cpath d=%22M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z%22/%3E%3Cpolyline points=%223.27 6.96 12 12.01 20.73 6.96%22/%3E%3Cline x1=%2212%22 y1=%2222.08%22 x2=%2212%22 y2=%2212%22/%3E%3C/svg%3E'">
+                                </div>
+                                <div class="product-title-group">
+                                    <h2>Scrapify</h2>
+                                    <span class="status-badge">Limited Access</span>
+                                </div>
+                            </div>
+
+                            <p class="product-description">
+                                AI-powered web intelligence platform for structured data extraction, research
+                                automation, and multi-source analysis. Built for teams that need accurate, compliant
+                                data collection at scale.
+                            </p>
+
+                            <div class="product-content">
+                                <span class="section-label">What it does</span>
+                                <p>Scrapify collects and analyzes information from websites and digital sources. It
+                                    extracts text content, links, media references, metadata, and both structured and
+                                    unstructured data from target sources.</p>
+
+                                <span class="section-label">How it works</span>
+                                <p>The system crawls and collects data, then normalizes and organizes extracted
+                                    information into usable formats. AI-assisted processing handles summarization,
+                                    filtering, and structuring of results.</p>
+
+                                <span class="section-label">Use cases</span>
+                                <div class="use-cases">
+                                    <div class="use-case">Research and competitive analysis</div>
+                                    <div class="use-case">Market intelligence gathering</div>
+                                    <div class="use-case">Content monitoring and discovery</div>
+                                    <div class="use-case">Security and vulnerability research</div>
+                                </div>
+
+                                <div class="compliance-note">
+                                    <strong>Compliance:</strong> Designed with ethical constraints and operates within
+                                    legal boundaries. Usage subject to approval and intended purpose.
+                                </div>
+
+                                <div class="compliance-note">
+                                    <strong>Status:</strong> Currently in testing with limited access. Available for
+                                    approved research and internal use cases.
+                                </div>
+
+                                <div class="cta-group">
+                                    <button class="cta-btn" onclick="requestAccess('Scrapify')">
+                                        Request access
+                                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M6 3l5 5-5 5" />
+                                        </svg>
+                                    </button>
+                                    <button class="cta-btn secondary" onclick="requestDemo('Scrapify')">
+                                        Request demo
+                                    </button>
+                                </div>
+                                <p class="access-note">Access requires approval. Contact us to explain your research
+                                    needs.</p>
+                            </div>
+                        </div>
+                        <div class="product-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                                alt="Data intelligence platform" loading="lazy">
+                        </div>
                     </div>
-                    <p class="product-description">
-                        AI-powered web intelligence platform for structured data extraction, research automation, and
-                        multi-source analysis. Built for teams that need accurate, compliant data at scale.
-                    </p>
-                    <ul class="features">
-                        <li>Extract structured data from websites, documents, images, and video content</li>
-                        <li>Parallel scraping with AI-powered summarization and entity extraction</li>
-                        <li>Research workflows with caching, deduplication, and metadata tracking</li>
-                        <li>Compliance-first approach with rate limiting and usage policies</li>
-                    </ul>
-                    <button class="cta-btn" onclick="requestAccess('Scrapify')">
-                        Request access
-                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M6 3l5 5-5 5" />
-                        </svg>
-                    </button>
                 </div>
             </div>
         </section>
@@ -409,19 +637,19 @@
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="services/ai-automation.html">AI Automation</a></li>
-                        <li><a href="services/api-integration.html">API Integration</a></li>
-                        <li><a href="services/cloud-devops.html">Cloud & DevOps</a></li>
-                        <li><a href="services/performance-cost.html">Performance & Cost</a></li>
-                        <li><a href="services/ui-ux-branding.html">UI/UX & Branding</a></li>
-                        <li><a href="services/web-development.html">Web Development</a></li>
+                        <li><a href="services.html#ai-automation">AI Automation</a></li>
+                        <li><a href="services.html#api-integration">API Integration</a></li>
+                        <li><a href="services.html#cloud-devops">Cloud & DevOps</a></li>
+                        <li><a href="services.html#performance">Performance & Cost</a></li>
+                        <li><a href="services.html#ui-ux">UI/UX & Branding</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Company</h4>
                     <ul>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="products.html">Products</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -454,7 +682,11 @@
         };
 
         function requestAccess(product) {
-            window.location.href = `contact.html?product=${encodeURIComponent(product)}`;
+            window.location.href = `contact.html?product=${encodeURIComponent(product)}&type=access`;
+        }
+
+        function requestDemo(product) {
+            window.location.href = `contact.html?product=${encodeURIComponent(product)}&type=demo`;
         }
     </script>
 </body>

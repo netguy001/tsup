@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description"
-        content="Learn about Techscale - a technology solutions company based in India helping businesses worldwide build reliable, scalable infrastructure.">
+        content="Learn about Techscale - a technology solutions company focused on building reliable, maintainable infrastructure for businesses worldwide.">
     <title>About - Techscale</title>
     <style>
         * {
@@ -37,7 +37,6 @@
             padding: 0 24px;
         }
 
-        /* Nav */
         nav {
             position: fixed;
             top: 0;
@@ -85,9 +84,8 @@
             cursor: pointer;
         }
 
-        /* Page Hero - Simple */
         .page-hero {
-            padding: 160px 0 80px;
+            padding: clamp(140px, 20vw, 160px) 0 clamp(60px, 10vw, 80px);
             background: var(--bg-light);
             text-align: center;
             border-bottom: 1px solid var(--border);
@@ -96,72 +94,73 @@
         .page-hero h1 {
             font-size: clamp(42px, 6vw, 56px);
             font-weight: 700;
-            margin-bottom: 20px;
+            margin-bottom: clamp(16px, 3vw, 20px);
             letter-spacing: -0.02em;
         }
 
         .page-hero p {
-            font-size: 20px;
+            font-size: clamp(16px, 2.5vw, 18px);
             color: var(--text-light);
             max-width: 600px;
             margin: 0 auto;
         }
 
-        /* Story Section */
         section {
-            padding: 100px 0;
+            padding: clamp(80px, 12vw, 100px) 0;
         }
 
         .story-section {
             background: var(--bg);
         }
 
-        .story-content {
-            max-width: 800px;
-            margin: 0 auto;
+        .story-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: clamp(40px, 8vw, 60px);
+            align-items: start;
+        }
+
+        .story-image {
+            width: 100%;
+            height: auto;
+            aspect-ratio: 4/3;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+            position: sticky;
+            top: 100px;
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
 
         .section-label {
             display: inline-block;
-            font-size: 13px;
+            font-size: clamp(11px, 2vw, 12px);
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.1em;
             color: var(--primary);
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
         }
 
         .story-content h2 {
             font-size: clamp(32px, 5vw, 42px);
             font-weight: 700;
-            margin-bottom: 32px;
+            margin-bottom: clamp(20px, 3vw, 28px);
             letter-spacing: -0.01em;
         }
 
         .story-content p {
-            font-size: 18px;
+            font-size: clamp(15px, 2.5vw, 16px);
             color: var(--text-light);
             line-height: 1.8;
-            margin-bottom: 24px;
+            margin-bottom: clamp(16px, 3vw, 20px);
         }
 
-        .highlight-box {
-            background: linear-gradient(135deg, rgba(37, 99, 235, 0.05), rgba(14, 165, 233, 0.05));
-            border-left: 4px solid var(--primary);
-            padding: 32px;
-            margin: 48px 0;
-            border-radius: 8px;
-        }
-
-        .highlight-box p {
-            font-size: 20px;
-            font-weight: 500;
-            color: var(--text);
-            margin: 0;
-            line-height: 1.7;
-        }
-
-        /* Stats */
         .stats-section {
             background: var(--bg-light);
             border-top: 1px solid var(--border);
@@ -170,9 +169,9 @@
 
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 48px;
-            max-width: 1000px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: clamp(32px, 6vw, 48px);
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -181,7 +180,7 @@
         }
 
         .stat-number {
-            font-size: 56px;
+            font-size: clamp(48px, 8vw, 56px);
             font-weight: 700;
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             -webkit-background-clip: text;
@@ -192,140 +191,67 @@
         }
 
         .stat-label {
-            font-size: 16px;
+            font-size: clamp(14px, 2vw, 15px);
             color: var(--text-light);
             font-weight: 500;
         }
 
-        /* Values Section */
-        .values-section {
+        .philosophy-section {
             background: var(--bg);
         }
 
         .section-header {
             max-width: 700px;
-            margin: 0 auto 80px;
+            margin: 0 auto clamp(50px, 8vw, 60px);
             text-align: center;
         }
 
         .section-header h2 {
             font-size: clamp(32px, 5vw, 42px);
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
         }
 
         .section-header p {
-            font-size: 18px;
+            font-size: clamp(15px, 2.5vw, 16px);
             color: var(--text-light);
         }
 
-        /* Timeline */
-        .timeline {
-            display: flex;
-            flex-direction: column;
-            gap: 60px;
-            position: relative;
+        .philosophy-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: clamp(24px, 4vw, 32px);
             max-width: 1000px;
             margin: 0 auto;
         }
 
-        .timeline::before {
-            content: '';
-            position: absolute;
-            left: 50%;
-            top: 0;
-            bottom: 0;
-            width: 2px;
-            background: linear-gradient(180deg, var(--primary), var(--secondary));
-            opacity: 0.3;
-            transform: translateX(-50%);
-        }
-
-        .timeline-item {
-            display: grid;
-            grid-template-columns: 1fr auto 1fr;
-            gap: 40px;
-            align-items: center;
-            position: relative;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-content {
-            grid-column: 1;
-            text-align: right;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-number {
-            grid-column: 2;
-        }
-
-        .timeline-item:nth-child(odd) .timeline-empty {
-            grid-column: 3;
-        }
-
-        .timeline-item:nth-child(even) .timeline-empty {
-            grid-column: 1;
-        }
-
-        .timeline-item:nth-child(even) .timeline-number {
-            grid-column: 2;
-        }
-
-        .timeline-item:nth-child(even) .timeline-content {
-            grid-column: 3;
-            text-align: left;
-        }
-
-        .timeline-number {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 56px;
-            height: 56px;
-            font-size: 18px;
-            font-weight: 700;
-            color: white;
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            border-radius: 50%;
-            position: relative;
-            z-index: 2;
-            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
-            flex-shrink: 0;
-        }
-
-        .timeline-content {
-            padding: 32px;
-            background: white;
-            border-radius: 16px;
+        .philosophy-card {
+            background: var(--bg);
             border: 1px solid var(--border);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-radius: 12px;
+            padding: clamp(24px, 4vw, 32px);
             transition: all 0.3s;
         }
 
-        .timeline-content:hover {
+        .philosophy-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.15);
-            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(37, 99, 235, 0.1);
         }
 
-        .timeline-content h3 {
-            font-size: 22px;
+        .philosophy-card h3 {
+            font-size: clamp(18px, 3vw, 20px);
             font-weight: 700;
-            margin-bottom: 12px;
+            margin-bottom: clamp(10px, 2vw, 12px);
             color: var(--text);
         }
 
-        .timeline-content p {
-            font-size: 16px;
+        .philosophy-card p {
+            font-size: clamp(14px, 2.5vw, 15px);
             color: var(--text-light);
             line-height: 1.7;
             margin: 0;
         }
 
-        .timeline-empty {
-            height: 1px;
-        }
-
-        /* Team Section */
         .team-section {
             background: var(--bg-light);
             border-top: 1px solid var(--border);
@@ -334,71 +260,70 @@
         .team-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-            margin-top: 64px;
+            gap: clamp(24px, 4vw, 32px);
+            margin-top: clamp(40px, 6vw, 60px);
         }
 
         .team-card {
             background: var(--bg);
             border: 1px solid var(--border);
             border-radius: 16px;
-            padding: 40px 32px;
+            padding: clamp(32px, 5vw, 40px) clamp(24px, 4vw, 32px);
             text-align: center;
             transition: all 0.3s;
         }
 
         .team-card:hover {
             border-color: var(--primary);
-            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
-            transform: translateY(-5px);
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.12);
+            transform: translateY(-4px);
         }
 
         .team-avatar {
-            width: 100px;
-            height: 100px;
+            width: clamp(80px, 12vw, 100px);
+            height: clamp(80px, 12vw, 100px);
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             border-radius: 50%;
-            margin: 0 auto 24px;
+            margin: 0 auto clamp(20px, 3vw, 24px);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 36px;
+            font-size: clamp(28px, 5vw, 36px);
             font-weight: 700;
             color: white;
             box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
         }
 
         .team-card h4 {
-            font-size: 22px;
+            font-size: clamp(18px, 3vw, 20px);
             font-weight: 700;
-            margin-bottom: 8px;
+            margin-bottom: clamp(6px, 1.5vw, 8px);
         }
 
         .team-role {
-            font-size: 13px;
+            font-size: clamp(12px, 2vw, 13px);
             font-weight: 600;
             color: var(--primary);
             text-transform: uppercase;
             letter-spacing: 0.05em;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
             display: block;
         }
 
         .team-card p {
-            font-size: 15px;
+            font-size: clamp(14px, 2.5vw, 15px);
             color: var(--text-light);
             line-height: 1.6;
             margin: 0;
         }
 
-        /* CTA */
         .cta {
             background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
             text-align: center;
             border-radius: 20px;
             margin: 0 24px;
-            padding: 80px 40px;
+            padding: clamp(60px, 10vw, 80px) clamp(32px, 5vw, 40px);
             position: relative;
             overflow: hidden;
         }
@@ -428,14 +353,14 @@
 
         .cta h2 {
             font-size: clamp(32px, 5vw, 42px);
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
             position: relative;
             z-index: 1;
         }
 
         .cta p {
-            font-size: 18px;
-            margin-bottom: 32px;
+            font-size: clamp(16px, 2.5vw, 18px);
+            margin-bottom: clamp(24px, 4vw, 32px);
             opacity: 0.95;
             position: relative;
             z-index: 1;
@@ -445,12 +370,13 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 16px 32px;
+            padding: clamp(14px, 2vw, 16px) clamp(28px, 4vw, 32px);
             background: white;
             color: var(--primary);
             text-decoration: none;
             border-radius: 10px;
             font-weight: 600;
+            font-size: clamp(14px, 2vw, 15px);
             transition: all 0.3s;
             box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
             position: relative;
@@ -468,25 +394,24 @@
             height: 16px;
         }
 
-        /* Footer */
         footer {
             background: var(--text);
             color: white;
-            padding: 80px 0 32px;
-            margin-top: 100px;
+            padding: clamp(60px, 10vw, 80px) 0 clamp(24px, 4vw, 32px);
+            margin-top: clamp(80px, 12vw, 100px);
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 60px;
-            margin-bottom: 40px;
+            gap: clamp(40px, 6vw, 60px);
+            margin-bottom: clamp(32px, 5vw, 40px);
         }
 
         .footer-section h4 {
-            font-size: 14px;
+            font-size: clamp(12px, 2vw, 14px);
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: clamp(16px, 3vw, 20px);
             opacity: 0.6;
             letter-spacing: 0.05em;
         }
@@ -503,6 +428,7 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: all 0.3s;
+            font-size: clamp(14px, 2vw, 15px);
         }
 
         .footer-section a:hover {
@@ -513,19 +439,15 @@
         .footer-section p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
+            font-size: clamp(14px, 2vw, 15px);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 32px;
+            padding-top: clamp(24px, 4vw, 32px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             opacity: 0.5;
-        }
-
-        @media (max-width: 1024px) {
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            font-size: clamp(13px, 2vw, 14px);
         }
 
         @media (max-width: 768px) {
@@ -556,41 +478,34 @@
                 display: block;
             }
 
-            .page-hero {
-                padding: 120px 0 60px;
+            .story-grid {
+                grid-template-columns: 1fr;
+                gap: clamp(24px, 5vw, 32px);
+                display: flex;
+                flex-direction: column;
             }
 
-            section {
-                padding: 60px 0;
+            .story-grid .story-image {
+                order: -1;
+            }
+
+            .story-grid .story-content {
+                order: 1;
+            }
+
+            .story-image {
+                height: auto;
+                aspect-ratio: 4/3;
+                position: static;
             }
 
             .stats-grid {
                 grid-template-columns: 1fr;
-                gap: 32px;
+                gap: clamp(24px, 5vw, 32px);
             }
 
-            .timeline::before {
-                left: 28px;
-            }
-
-            .timeline-item {
-                grid-template-columns: auto 1fr;
-                gap: 20px;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-content,
-            .timeline-item:nth-child(even) .timeline-content {
-                grid-column: 2;
-                text-align: left;
-            }
-
-            .timeline-item:nth-child(odd) .timeline-number,
-            .timeline-item:nth-child(even) .timeline-number {
-                grid-column: 1;
-            }
-
-            .timeline-empty {
-                display: none;
+            .philosophy-grid {
+                grid-template-columns: 1fr;
             }
 
             .team-grid {
@@ -604,7 +519,6 @@
 
             .cta {
                 margin: 0 16px;
-                padding: 60px 24px;
             }
         }
     </style>
@@ -620,7 +534,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
-                <li><a href="pricing.html">Products</a></li>
+                <li><a href="products.html">Products</a></li>
                 <li><a href="about.html" class="active">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -631,33 +545,31 @@
         <section class="page-hero">
             <div class="container">
                 <h1>About Techscale</h1>
-                <p>Building enterprise infrastructure solutions from India for businesses worldwide</p>
+                <p>Engineering-focused infrastructure solutions for teams building systems that matter</p>
             </div>
         </section>
 
         <section class="story-section">
             <div class="container">
-                <div class="story-content">
-                    <span class="section-label">Our story</span>
-                    <h2>Who we are</h2>
-                    <p>Techscale is a technology solutions company based in India, focused on helping businesses build
-                        and scale reliable infrastructure. We work with startups and enterprises that need engineering
-                        expertise to support their growth.</p>
-
-                    <p>Our approach combines technical depth with practical execution. Whether you're building your
-                        first product or modernizing existing systems, we provide the architecture, automation, and
-                        infrastructure capabilities that let you focus on your business.</p>
-
-                    <div class="highlight-box">
-                        <p>Founded on the principle that every business deserves access to world-class
-                            infrastructure—we've helped companies from early-stage startups to enterprises handling
-                            millions of users build systems that scale.</p>
+                <div class="story-grid">
+                    <div class="story-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
+                            alt="Team collaboration" loading="lazy">
                     </div>
+                    <div class="story-content">
+                        <span class="section-label">Who we are</span>
+                        <h2>Why Techscale exists</h2>
+                        <p>Most infrastructure problems stem from architecture decisions made under time pressure.
+                            Systems built for "now" create technical debt that compounds over months and years.</p>
 
-                    <p>We started by helping early-stage startups build their first products. Today, we work with
-                        businesses across industries, providing the technical foundation they need to grow without
-                        constantly firefighting infrastructure issues. Our team brings deep expertise in cloud
-                        architecture, automation, AI implementation, and enterprise-grade system design.</p>
+                        <p>Techscale was founded to change that pattern. We work with teams that need infrastructure
+                            designed for long-term reliability, not short-term demos. Our engagements focus on building
+                            systems that scale without constant firefighting.</p>
+
+                        <p>We approach every project with the same discipline: understand the actual requirements,
+                            design for maintainability, implement with proper testing and monitoring, and document
+                            decisions clearly.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -667,7 +579,7 @@
                 <div class="stats-grid">
                     <div class="stat-item">
                         <span class="stat-number">50+</span>
-                        <span class="stat-label">Enterprise clients</span>
+                        <span class="stat-label">Projects delivered</span>
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">99.9%</span>
@@ -677,57 +589,40 @@
                         <span class="stat-number">24/7</span>
                         <span class="stat-label">Support available</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number">10+</span>
-                        <span class="stat-label">Years experience</span>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section class="values-section">
+        <section class="philosophy-section">
             <div class="container">
                 <div class="section-header">
-                    <span class="section-label">Our principles</span>
-                    <h2>How we work</h2>
-                    <p>The values that guide every project we build and every client relationship we maintain.</p>
+                    <span class="section-label">Engineering principles</span>
+                    <h2>How we approach technical work</h2>
+                    <p>The practices that guide every system we design and every line of code we write.</p>
                 </div>
-                <div class="timeline">
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Engineering excellence</h3>
-                            <p>We build systems with clean architecture, proper documentation, and maintainable code.
-                                Technical quality isn't negotiable—it's the foundation of everything we deliver.</p>
-                        </div>
-                        <div class="timeline-number">01</div>
-                        <div class="timeline-empty"></div>
+                <div class="philosophy-grid">
+                    <div class="philosophy-card">
+                        <h3>Architecture before implementation</h3>
+                        <p>We design systems on paper before writing code. Proper architecture prevents problems that
+                            would require rewrites later. Every technical decision is documented with reasoning and
+                            tradeoffs.</p>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-empty"></div>
-                        <div class="timeline-number">02</div>
-                        <div class="timeline-content">
-                            <h3>Client outcomes</h3>
-                            <p>Success means measurable improvements in your operations. We focus on reliability,
-                                performance, and business impact, not vanity metrics.</p>
-                        </div>
+                    <div class="philosophy-card">
+                        <h3>Security by default</h3>
+                        <p>Security isn't a feature to add later. Authentication, authorization, encryption, and audit
+                            logging are baseline requirements. We design systems assuming they will be attacked.</p>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-content">
-                            <h3>Honest communication</h3>
-                            <p>We explain technical decisions clearly, set realistic expectations, and keep you
-                                informed. No jargon, no overpromising, no surprises.</p>
-                        </div>
-                        <div class="timeline-number">03</div>
-                        <div class="timeline-empty"></div>
+                    <div class="philosophy-card">
+                        <h3>Built for maintainability</h3>
+                        <p>Code quality determines long-term velocity. We write systems that your team can modify six
+                            months later without deciphering cryptic patterns. Clear architecture, consistent
+                            conventions, comprehensive tests.</p>
                     </div>
-                    <div class="timeline-item">
-                        <div class="timeline-empty"></div>
-                        <div class="timeline-number">04</div>
-                        <div class="timeline-content">
-                            <h3>Long-term thinking</h3>
-                            <p>We optimize for systems that last and scale, not quick fixes. Today's architecture
-                                decisions affect your capabilities for years.</p>
-                        </div>
+                    <div class="philosophy-card">
+                        <h3>Clear communication</h3>
+                        <p>Technical decisions are explained in plain language. Status updates are factual. When
+                            problems occur, we explain what happened, why it happened, and how we're preventing
+                            recurrence.</p>
                     </div>
                 </div>
             </div>
@@ -737,30 +632,28 @@
             <div class="container">
                 <div class="section-header">
                     <span class="section-label">Leadership</span>
-                    <h2>Meet the core team</h2>
-                    <p>The people responsible for technical delivery and client success at Techscale.</p>
+                    <h2>Core team</h2>
+                    <p>The people responsible for technical delivery and operational reliability at Techscale.</p>
                 </div>
                 <div class="team-grid">
                     <div class="team-card">
-                        <div class="team-avatar">AJ</div>
-                        <h4>Alex Johnson</h4>
-                        <span class="team-role">Co-Founder & CEO</span>
-                        <p>Leads strategic direction and client relationships. 10+ years building and scaling technology
-                            companies across infrastructure and SaaS.</p>
+                        <div class="team-avatar">RK</div>
+                        <h4>Rajesh Kumar</h4>
+                        <span class="team-role">Founder & Lead Architect</span>
+                        <p>15+ years building distributed systems for fintech and enterprise infrastructure.</p>
                     </div>
                     <div class="team-card">
-                        <div class="team-avatar">SC</div>
-                        <h4>Sarah Chen</h4>
-                        <span class="team-role">Co-Founder & CTO</span>
-                        <p>Oversees technical architecture and engineering teams. Specializes in distributed systems,
-                            cloud infrastructure, and AI implementation.</p>
+                        <div class="team-avatar">PS</div>
+                        <h4>Priya Sharma</h4>
+                        <span class="team-role">Head of Engineering</span>
+                        <p>Former tech lead at cloud infrastructure companies, specializes in automation and DevOps.</p>
                     </div>
                     <div class="team-card">
-                        <div class="team-avatar">MR</div>
-                        <h4>Michael Rodriguez</h4>
-                        <span class="team-role">Head of Operations</span>
-                        <p>Manages project delivery and maintains quality standards. Ensures every engagement meets
-                            technical and operational requirements.</p>
+                        <div class="team-avatar">AM</div>
+                        <h4>Arjun Mehta</h4>
+                        <span class="team-role">Security & Operations</span>
+                        <p>Background in cybersecurity and compliance, ensures systems meet enterprise security
+                            standards.</p>
                     </div>
                 </div>
             </div>
@@ -768,8 +661,8 @@
 
         <section class="cta">
             <div class="container">
-                <h2>Ready to work together?</h2>
-                <p>Let's discuss how we can support your infrastructure and scaling needs.</p>
+                <h2>Work with us</h2>
+                <p>Let's discuss how we can support your infrastructure needs.</p>
                 <a href="contact.html" class="btn">
                     Get in touch
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
@@ -791,19 +684,19 @@
                 <div class="footer-section">
                     <h4>Services</h4>
                     <ul>
-                        <li><a href="services/ai-automation.html">AI Automation</a></li>
-                        <li><a href="services/api-integration.html">API Integration</a></li>
-                        <li><a href="services/cloud-devops.html">Cloud & DevOps</a></li>
-                        <li><a href="services/performance-cost.html">Performance & Cost</a></li>
-                        <li><a href="services/ui-ux-branding.html">UI/UX & Branding</a></li>
-                        <li><a href="services/web-development.html">Web Development</a></li>
+                        <li><a href="services.html#ai-automation">AI Automation</a></li>
+                        <li><a href="services.html#api-integration">API Integration</a></li>
+                        <li><a href="services.html#cloud-devops">Cloud & DevOps</a></li>
+                        <li><a href="services.html#performance">Performance & Cost</a></li>
+                        <li><a href="services.html#ui-ux">UI/UX & Branding</a></li>
+                        <li><a href="services.html#web-dev">Web Development</a></li>
                     </ul>
                 </div>
                 <div class="footer-section">
                     <h4>Company</h4>
                     <ul>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="products.html">Products</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>

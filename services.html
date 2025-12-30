@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services - Techscale</title>
+    <title>How We Help - Techscale</title>
     <style>
         * {
             margin: 0;
@@ -27,13 +27,12 @@
             background: var(--bg);
             color: var(--text);
             line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 24px;
+            padding: 0 clamp(16px, 4vw, 24px);
         }
 
         nav {
@@ -59,7 +58,7 @@
 
         .nav-links {
             display: flex;
-            gap: 40px;
+            gap: clamp(20px, 4vw, 40px);
             list-style: none;
         }
 
@@ -84,337 +83,232 @@
         }
 
         .hero {
-            padding: 180px 0 100px;
+            padding: clamp(140px, 20vw, 180px) 0 clamp(60px, 10vw, 80px);
             text-align: center;
             background: var(--bg-light);
             border-bottom: 1px solid var(--border);
         }
 
         .hero h1 {
-            font-size: clamp(48px, 6vw, 64px);
+            font-size: clamp(32px, 6vw, 48px);
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: clamp(16px, 3vw, 24px);
             letter-spacing: -0.02em;
         }
 
         .hero p {
-            font-size: 20px;
+            font-size: clamp(16px, 2.5vw, 18px);
             color: var(--text-light);
             max-width: 700px;
             margin: 0 auto;
             line-height: 1.7;
         }
 
-        .services-overview {
-            padding: 100px 0;
+        .service-section {
+            padding: clamp(80px, 12vw, 120px) 0;
+            border-bottom: 1px solid var(--border);
         }
 
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 24px;
-            margin-top: 64px;
-        }
-
-        .service-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 40px 32px;
-            transition: all 0.3s;
-        }
-
-        .service-card:hover {
-            border-color: var(--primary);
-            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
-            transform: translateY(-4px);
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 16px 16px 0 0;
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-icon {
-            width: 64px;
-            height: 64px;
-            margin-bottom: 24px;
-        }
-
-        .service-icon img {
-            width: 100%;
-            height: 100%;
-            object-fit: contain;
-        }
-
-        .service-card h3 {
-            font-size: 22px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .service-card p {
-            color: var(--text-light);
-            font-size: 15px;
-            line-height: 1.7;
-            margin-bottom: 24px;
-        }
-
-        .btn-secondary {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: transparent;
-            color: var(--primary);
-            text-decoration: none;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-weight: 600;
-            font-size: 14px;
-            transition: all 0.3s;
-        }
-
-        .btn-secondary:hover {
-            background: var(--bg-light);
-            border-color: var(--primary);
-        }
-
-        .btn-secondary svg {
-            width: 14px;
-            height: 14px;
-        }
-
-        .service-detail {
-            padding: 100px 0;
-            border-top: 1px solid var(--border);
-        }
-
-        .service-detail:nth-child(even) {
+        .service-section:nth-child(even) {
             background: var(--bg-light);
         }
 
-        .service-detail-content {
+        .service-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 80px;
-            align-items: start;
+            gap: clamp(40px, 8vw, 80px);
+            align-items: center;
         }
 
-        .service-detail-left h2 {
-            font-size: clamp(32px, 4vw, 42px);
+        .service-image {
+            width: 100%;
+            height: clamp(300px, 40vw, 450px);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .service-text h2 {
+            font-size: clamp(28px, 5vw, 42px);
             font-weight: 700;
-            margin-bottom: 24px;
+            margin-bottom: clamp(12px, 2vw, 16px);
             letter-spacing: -0.01em;
         }
 
-        .service-detail-left p {
-            font-size: 18px;
-            color: var(--text-light);
-            line-height: 1.8;
-            margin-bottom: 32px;
+        .when-you-need {
+            font-size: clamp(15px, 2.5vw, 17px);
+            color: var(--text);
+            background: rgba(37, 99, 235, 0.05);
+            border-left: 3px solid var(--primary);
+            padding: clamp(12px, 2vw, 16px) clamp(16px, 3vw, 20px);
+            margin-bottom: clamp(20px, 3vw, 28px);
+            border-radius: 4px;
+            line-height: 1.6;
         }
 
-        .btn-primary {
+        .section-label {
+            font-size: clamp(11px, 2vw, 12px);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: clamp(10px, 2vw, 12px);
+            margin-top: clamp(20px, 3vw, 24px);
+            display: block;
+        }
+
+        .service-list {
+            list-style: none;
+            margin-bottom: clamp(24px, 3vw, 32px);
+        }
+
+        .service-list li {
+            font-size: clamp(14px, 2.5vw, 15px);
+            color: var(--text-light);
+            padding: clamp(8px, 1.5vw, 10px) 0;
+            line-height: 1.6;
+        }
+
+        .service-list li::before {
+            content: '•';
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 10px;
+        }
+
+        .btn {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            padding: 16px 32px;
+            padding: clamp(12px, 2vw, 16px) clamp(24px, 4vw, 32px);
             background: var(--primary);
             color: white;
             text-decoration: none;
             border-radius: 10px;
             font-weight: 600;
+            font-size: clamp(14px, 2vw, 15px);
             transition: all 0.3s;
             box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
             border: none;
             cursor: pointer;
-            font-size: 15px;
         }
 
-        .btn-primary:hover {
+        .btn:hover {
             background: #1D4ED8;
             transform: translateY(-2px);
             box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
         }
 
-        .btn-primary svg {
-            width: 16px;
-            height: 16px;
-        }
-
-        .service-capabilities {
-            list-style: none;
-        }
-
-        .service-capabilities li {
-            padding: 16px 0;
-            border-bottom: 1px solid var(--border);
-            color: var(--text);
-            font-size: 16px;
-            line-height: 1.6;
-        }
-
-        .service-capabilities li:last-child {
-            border-bottom: none;
-        }
-
-        .service-capabilities li::before {
-            content: '→';
-            color: var(--primary);
-            font-weight: 700;
-            margin-right: 12px;
+        .btn svg {
+            width: 14px;
+            height: 14px;
         }
 
         .how-we-work {
-            padding: 100px 0;
+            padding: clamp(80px, 15vw, 120px) 0;
             background: var(--bg-light);
             border-top: 1px solid var(--border);
-            border-bottom: 1px solid var(--border);
         }
 
-        .section-header {
-            max-width: 700px;
-            margin: 0 auto 80px;
+        .how-we-work-header {
+            max-width: 800px;
+            margin: 0 auto clamp(50px, 8vw, 70px);
             text-align: center;
         }
 
-        .section-label {
-            display: inline-block;
-            font-size: 13px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.1em;
-            color: var(--primary);
-            margin-bottom: 16px;
-        }
-
-        .section-header h2 {
+        .how-we-work h2 {
             font-size: clamp(32px, 5vw, 42px);
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: clamp(12px, 2vw, 16px);
+            letter-spacing: -0.01em;
         }
 
-        .section-header p {
-            font-size: 18px;
+        .how-we-work-header p {
+            font-size: clamp(15px, 2.5vw, 17px);
             color: var(--text-light);
+            line-height: 1.6;
         }
 
-        .principles-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 32px;
-        }
-
-        .principle-card {
-            background: var(--bg);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-        }
-
-        .principle-card h3 {
-            font-size: 20px;
-            font-weight: 700;
-            margin-bottom: 12px;
-        }
-
-        .principle-card p {
-            font-size: 15px;
-            color: var(--text-light);
-            line-height: 1.7;
-        }
-
-        .cta-section {
-            background: linear-gradient(135deg, var(--primary), var(--secondary));
-            color: white;
-            text-align: center;
-            border-radius: 20px;
-            margin: 100px 24px;
-            padding: 80px 40px;
+        .roadmap {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            gap: clamp(20px, 3vw, 32px);
             position: relative;
-            overflow: hidden;
+            max-width: 1100px;
+            margin: 0 auto;
         }
 
-        .cta-section::before {
+        .roadmap::before {
             content: '';
             position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
-            animation: float 15s infinite;
+            top: 32px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            opacity: 0.3;
+            z-index: 0;
         }
 
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0);
-            }
-
-            50% {
-                transform: translateY(-30px);
-            }
-        }
-
-        .cta-section h2 {
-            font-size: clamp(32px, 5vw, 42px);
-            margin-bottom: 16px;
+        .roadmap-step {
+            flex: 1;
             position: relative;
             z-index: 1;
         }
 
-        .cta-section p {
-            font-size: 18px;
-            margin-bottom: 32px;
-            opacity: 0.95;
-            position: relative;
-            z-index: 1;
+        .roadmap-number {
+            width: 64px;
+            height: 64px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto clamp(16px, 3vw, 20px);
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.3);
         }
 
-        .cta-section .btn-primary {
-            background: white;
-            color: var(--primary);
-            position: relative;
-            z-index: 1;
+        .roadmap-step h3 {
+            font-size: clamp(16px, 2.5vw, 18px);
+            margin-bottom: clamp(8px, 1.5vw, 10px);
+            text-align: center;
+            color: var(--text);
         }
 
-        .cta-section .btn-primary:hover {
-            background: var(--bg-light);
+        .roadmap-step p {
+            font-size: clamp(13px, 2vw, 14px);
+            color: var(--text-light);
+            line-height: 1.6;
+            text-align: center;
         }
 
         footer {
             background: var(--text);
             color: white;
-            padding: 80px 0 32px;
-            margin-top: 100px;
+            padding: clamp(60px, 10vw, 80px) 0 clamp(24px, 4vw, 32px);
         }
 
         .footer-grid {
             display: grid;
             grid-template-columns: 2fr repeat(3, 1fr);
-            gap: 60px;
-            margin-bottom: 40px;
+            gap: clamp(40px, 6vw, 60px);
+            margin-bottom: clamp(32px, 5vw, 40px);
         }
 
         .footer-section h4 {
-            font-size: 14px;
+            font-size: clamp(12px, 2vw, 14px);
             text-transform: uppercase;
-            margin-bottom: 20px;
+            margin-bottom: clamp(16px, 3vw, 20px);
             opacity: 0.6;
             letter-spacing: 0.05em;
         }
@@ -431,6 +325,7 @@
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
             transition: all 0.3s;
+            font-size: clamp(14px, 2vw, 15px);
         }
 
         .footer-section a:hover {
@@ -441,28 +336,15 @@
         .footer-section p {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
+            font-size: clamp(14px, 2vw, 15px);
         }
 
         .footer-bottom {
             text-align: center;
-            padding-top: 32px;
+            padding-top: clamp(24px, 4vw, 32px);
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             opacity: 0.5;
-        }
-
-        @media (max-width: 1024px) {
-            .services-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-
-            .service-detail-content {
-                grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .principles-grid {
-                grid-template-columns: 1fr;
-            }
+            font-size: clamp(13px, 2vw, 14px);
         }
 
         @media (max-width: 768px) {
@@ -493,28 +375,67 @@
                 display: block;
             }
 
-            .hero {
-                padding: 140px 0 80px;
-            }
-
-            .services-overview,
-            .service-detail,
-            .how-we-work {
-                padding: 60px 0;
-            }
-
-            .services-grid {
+            .service-grid {
                 grid-template-columns: 1fr;
+                gap: clamp(24px, 5vw, 32px);
+                display: flex;
+                flex-direction: column;
+            }
+
+            .service-grid .service-image {
+                order: -1;
+            }
+
+            .service-grid .service-text {
+                order: 1;
+            }
+
+            .service-image {
+                height: clamp(220px, 35vw, 300px);
+            }
+
+            .roadmap {
+                flex-direction: column;
+                gap: clamp(32px, 6vw, 40px);
+            }
+
+            .roadmap::before {
+                top: 0;
+                left: 32px;
+                right: auto;
+                bottom: 0;
+                width: 2px;
+                height: 100%;
+                background: linear-gradient(180deg, var(--primary), var(--secondary));
+            }
+
+            .roadmap-step {
+                display: grid;
+                grid-template-columns: auto 1fr;
+                gap: 20px;
+                align-items: start;
+                text-align: left;
+            }
+
+            .roadmap-number {
+                width: 48px;
+                height: 48px;
+                font-size: 16px;
+                margin: 0;
+                flex-shrink: 0;
+            }
+
+            .roadmap-step h3,
+            .roadmap-step p {
+                text-align: left;
+            }
+
+            .roadmap-content {
+                padding-top: 8px;
             }
 
             .footer-grid {
                 grid-template-columns: 1fr;
-                gap: 40px;
-            }
-
-            .cta-section {
-                margin: 60px 16px;
-                padding: 60px 24px;
             }
         }
     </style>
@@ -530,7 +451,7 @@
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html" class="active">Services</a></li>
-                <li><a href="pricing.html">Products</a></li>
+                <li><a href="products.html">Products</a></li>
                 <li><a href="about.html">About</a></li>
                 <li><a href="contact.html">Contact</a></li>
             </ul>
@@ -540,332 +461,244 @@
     <main>
         <section class="hero">
             <div class="container">
-                <h1>Technology services built for scale</h1>
-                <p>Engineering-led solutions designed for businesses that need reliable infrastructure, intelligent
-                    automation, and systems that work as they grow.</p>
+                <h1>How we help teams build and scale</h1>
+                <p>This page explains what each service actually does, what problems it solves, and what you can expect
+                    when working with us.</p>
             </div>
         </section>
 
-        <section class="services-overview">
+        <!-- AI Automation: IMAGE LEFT, CONTENT RIGHT -->
+        <section id="ai-automation" class="service-section">
             <div class="container">
-                <div class="services-grid">
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="assets/img/1.png" alt="AI Automation">
-                        </div>
-                        <h3>AI Automation</h3>
-                        <p>Deploy intelligent workflows that eliminate manual processes and reduce operational overhead
-                            across your organization.</p>
-                        <a href="#ai-automation" class="btn-secondary">
-                            Explore service
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 3l5 5-5 5" />
-                            </svg>
-                        </a>
+                <div class="service-grid">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
+                            alt="AI Automation" loading="lazy">
                     </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="assets/img/2.png" alt="API Integration">
-                        </div>
-                        <h3>API Integration</h3>
-                        <p>Connect disparate systems with reliable, scalable integrations built on enterprise-grade API
-                            architecture.</p>
-                        <a href="#api-integration" class="btn-secondary">
-                            Explore service
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 3l5 5-5 5" />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="assets/img/3.png" alt="Cloud & DevOps">
-                        </div>
-                        <h3>Cloud & DevOps</h3>
-                        <p>Design and operate infrastructure that handles growth without increasing complexity or
-                            maintenance burden.</p>
-                        <a href="#cloud-devops" class="btn-secondary">
-                            Explore service
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 3l5 5-5 5" />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="assets/img/4.png" alt="Performance Optimization">
-                        </div>
-                        <h3>Performance Optimization</h3>
-                        <p>Reduce cloud spend and improve system performance through architectural improvements and
-                            resource efficiency.</p>
-                        <a href="#performance" class="btn-secondary">
-                            Explore service
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 3l5 5-5 5" />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="assets/img/5.png" alt="UI/UX & Branding">
-                        </div>
-                        <h3>UI/UX & Branding</h3>
-                        <p>Design interfaces that users understand immediately and brands that communicate value clearly
-                            and consistently.</p>
-                        <a href="#ui-ux" class="btn-secondary">
-                            Explore service
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 3l5 5-5 5" />
-                            </svg>
-                        </a>
-                    </div>
-
-                    <div class="service-card">
-                        <div class="service-icon">
-                            <img src="assets/img/6.png" alt="Web Development">
-                        </div>
-                        <h3>Web Development</h3>
-                        <p>Build applications with clean architecture that's maintainable and performant as your team
-                            and user base grows.</p>
-                        <a href="#web-dev" class="btn-secondary">
-                            Explore service
-                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M6 3l5 5-5 5" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="ai-automation" class="service-detail">
-            <div class="container">
-                <div class="service-detail-content">
-                    <div class="service-detail-left">
+                    <div class="service-text">
                         <h2>AI Automation</h2>
-                        <p>Organizations lose significant operational capacity to repetitive manual work. AI automation
-                            addresses this by building intelligent workflows that handle routine processes, classify
-                            data accurately, and reduce the overhead that prevents teams from focusing on strategic
-                            work.</p>
-                        <button class="btn-primary" onclick="discussService('AI Automation')">
+                        <div class="when-you-need">
+                            Your team spends hours on manual data entry, document processing, or repetitive decisions.
+                        </div>
+
+                        <span class="section-label">What we deliver</span>
+                        <ul class="service-list">
+                            <li>Production systems that process documents and extract structured data automatically</li>
+                            <li>Classification pipelines that route work items based on content and context</li>
+                            <li>Decision support systems with confidence scoring and clear audit trails</li>
+                        </ul>
+
+                        <button class="btn" onclick="contactService('AI Automation')">
                             Discuss this service
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
                             </svg>
                         </button>
                     </div>
-                    <div class="service-detail-right">
-                        <ul class="service-capabilities">
-                            <li>Design and implement intelligent document processing, data extraction, and
-                                classification systems</li>
-                            <li>Build workflow automation that adapts to business logic and reduces manual intervention
-                            </li>
-                            <li>Integrate machine learning models for prediction, anomaly detection, and decision
-                                support</li>
-                            <li>Deploy natural language processing for content analysis, summarization, and intent
-                                classification</li>
-                            <li>Create monitoring systems that track automation performance and identify improvement
-                                areas</li>
-                            <li>Establish governance frameworks for AI systems including bias detection and model
-                                versioning</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="api-integration" class="service-detail">
+        <!-- API Integration: CONTENT LEFT, IMAGE RIGHT -->
+        <section id="api-integration" class="service-section">
             <div class="container">
-                <div class="service-detail-content">
-                    <div class="service-detail-left">
+                <div class="service-grid">
+                    <div class="service-text">
                         <h2>API Integration</h2>
-                        <p>Disconnected systems create data silos and operational friction. API integration connects
-                            your applications, enabling real-time data flow and unified operations. Built for
-                            reliability and scale, these integrations eliminate manual data transfer and synchronization
-                            issues.</p>
-                        <button class="btn-primary" onclick="discussService('API Integration')">
+                        <div class="when-you-need">
+                            Data lives in multiple systems and your team manually copies information between them.
+                        </div>
+
+                        <span class="section-label">What we deliver</span>
+                        <ul class="service-list">
+                            <li>Bidirectional sync systems that keep data consistent across platforms</li>
+                            <li>Real-time webhook handlers with proper authentication and retry logic</li>
+                            <li>Data transformation pipelines that handle schema differences gracefully</li>
+                        </ul>
+
+                        <button class="btn" onclick="contactService('API Integration')">
                             Discuss this service
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
                             </svg>
                         </button>
                     </div>
-                    <div class="service-detail-right">
-                        <ul class="service-capabilities">
-                            <li>Design RESTful and GraphQL APIs with proper authentication, rate limiting, and
-                                versioning</li>
-                            <li>Build integrations between SaaS platforms, databases, and internal systems</li>
-                            <li>Implement event-driven architectures with message queues and webhooks</li>
-                            <li>Create data transformation pipelines that handle format conversion and validation</li>
-                            <li>Establish monitoring and alerting for integration health and performance</li>
-                            <li>Document API contracts and maintain integration testing suites</li>
-                        </ul>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
+                            alt="API Integration" loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="cloud-devops" class="service-detail">
+        <!-- Cloud & DevOps: IMAGE LEFT, CONTENT RIGHT -->
+        <section id="cloud-devops" class="service-section">
             <div class="container">
-                <div class="service-detail-content">
-                    <div class="service-detail-left">
+                <div class="service-grid">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
+                            alt="Cloud & DevOps" loading="lazy">
+                    </div>
+                    <div class="service-text">
                         <h2>Cloud & DevOps</h2>
-                        <p>Infrastructure complexity increases faster than team capacity as businesses scale. Cloud and
-                            DevOps practices address this through automation, infrastructure as code, and deployment
-                            pipelines that maintain reliability while reducing operational overhead.</p>
-                        <button class="btn-primary" onclick="discussService('Cloud & DevOps')">
+                        <div class="when-you-need">
+                            Deployments are manual and error-prone, or your team firefights outages instead of building.
+                        </div>
+
+                        <span class="section-label">What we deliver</span>
+                        <ul class="service-list">
+                            <li>Infrastructure as code with automated deployment pipelines</li>
+                            <li>Monitoring and alerting that catches issues before users report them</li>
+                            <li>Auto-scaling configurations that handle traffic without manual intervention</li>
+                        </ul>
+
+                        <button class="btn" onclick="contactService('Cloud & DevOps')">
                             Discuss this service
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
                             </svg>
                         </button>
                     </div>
-                    <div class="service-detail-right">
-                        <ul class="service-capabilities">
-                            <li>Design cloud architecture on AWS, Azure, or GCP with proper networking and security
-                                controls</li>
-                            <li>Implement infrastructure as code using Terraform, CloudFormation, or similar tools</li>
-                            <li>Build CI/CD pipelines for automated testing, deployment, and rollback capabilities</li>
-                            <li>Configure container orchestration with Kubernetes or managed services</li>
-                            <li>Establish monitoring, logging, and alerting infrastructure for system observability</li>
-                            <li>Create disaster recovery procedures and maintain infrastructure documentation</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="performance" class="service-detail">
+        <!-- Performance: CONTENT LEFT, IMAGE RIGHT -->
+        <section id="performance" class="service-section">
             <div class="container">
-                <div class="service-detail-content">
-                    <div class="service-detail-left">
+                <div class="service-grid">
+                    <div class="service-text">
                         <h2>Performance Optimization</h2>
-                        <p>System performance degrades over time as usage patterns change and technical debt
-                            accumulates. Performance optimization identifies bottlenecks, improves resource efficiency,
-                            and reduces cloud costs through architectural improvements and code-level changes.</p>
-                        <button class="btn-primary" onclick="discussService('Performance Optimization')">
+                        <div class="when-you-need">
+                            Your application feels slow, cloud bills keep increasing, or adding servers doesn't help.
+                        </div>
+
+                        <span class="section-label">What we deliver</span>
+                        <ul class="service-list">
+                            <li>Performance profiling that identifies actual bottlenecks</li>
+                            <li>Database query optimization with proper indexing strategies</li>
+                            <li>Multi-layer caching that reduces load and improves response times</li>
+                        </ul>
+
+                        <button class="btn" onclick="contactService('Performance Optimization')">
                             Discuss this service
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
                             </svg>
                         </button>
                     </div>
-                    <div class="service-detail-right">
-                        <ul class="service-capabilities">
-                            <li>Conduct performance audits of application code, database queries, and infrastructure
-                                configuration</li>
-                            <li>Optimize database schemas, indexes, and query patterns for improved response times</li>
-                            <li>Implement caching strategies at application, database, and CDN levels</li>
-                            <li>Analyze cloud resource usage and right-size instances for cost reduction</li>
-                            <li>Establish performance benchmarks and load testing procedures</li>
-                            <li>Create monitoring dashboards that track performance metrics and cost trends</li>
-                        </ul>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
+                            alt="Performance Optimization" loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="ui-ux" class="service-detail">
+        <!-- UI/UX: IMAGE LEFT, CONTENT RIGHT -->
+        <section id="ui-ux" class="service-section">
             <div class="container">
-                <div class="service-detail-content">
-                    <div class="service-detail-left">
+                <div class="service-grid">
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
+                            alt="UI/UX & Branding" loading="lazy">
+                    </div>
+                    <div class="service-text">
                         <h2>UI/UX & Branding</h2>
-                        <p>Poor interface design increases support costs and reduces user adoption. UI/UX work focuses
-                            on creating interfaces that communicate function clearly, reduce cognitive load, and
-                            maintain consistency across your product and brand touchpoints.</p>
-                        <button class="btn-primary" onclick="discussService('UI/UX & Branding')">
+                        <div class="when-you-need">
+                            Users struggle to complete tasks, or support tickets are mostly "how do I..." questions.
+                        </div>
+
+                        <span class="section-label">What we deliver</span>
+                        <ul class="service-list">
+                            <li>User research and workflow analysis that identifies real pain points</li>
+                            <li>Interface designs that guide users through tasks without explanation</li>
+                            <li>Design systems with reusable components for visual consistency</li>
+                        </ul>
+
+                        <button class="btn" onclick="contactService('UI/UX & Branding')">
                             Discuss this service
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
                             </svg>
                         </button>
                     </div>
-                    <div class="service-detail-right">
-                        <ul class="service-capabilities">
-                            <li>Conduct user research and usability testing to identify friction points</li>
-                            <li>Design interface components and interaction patterns based on user workflows</li>
-                            <li>Create design systems with reusable components and documentation</li>
-                            <li>Develop brand identity including visual language, typography, and style guidelines</li>
-                            <li>Build prototypes for validation before development investment</li>
-                            <li>Establish accessibility standards and ensure WCAG compliance</li>
-                        </ul>
-                    </div>
                 </div>
             </div>
         </section>
 
-        <section id="web-dev" class="service-detail">
+        <!-- Web Dev: CONTENT LEFT, IMAGE RIGHT -->
+        <section id="web-dev" class="service-section">
             <div class="container">
-                <div class="service-detail-content">
-                    <div class="service-detail-left">
+                <div class="service-grid">
+                    <div class="service-text">
                         <h2>Web Development</h2>
-                        <p>Applications built without proper architecture become increasingly difficult to maintain and
-                            extend. Web development focuses on clean code, scalable architecture, and maintainable
-                            systems that support your business as requirements evolve.</p>
-                        <button class="btn-primary" onclick="discussService('Web Development')">
+                        <div class="when-you-need">
+                            You need to build a new application, or your codebase has become impossible to modify.
+                        </div>
+
+                        <span class="section-label">What we deliver</span>
+                        <ul class="service-list">
+                            <li>Applications with clear architecture that future developers can understand</li>
+                            <li>Comprehensive test coverage that catches issues before deployment</li>
+                            <li>Security measures and documentation built in from the start</li>
+                        </ul>
+
+                        <button class="btn" onclick="contactService('Web Development')">
                             Discuss this service
                             <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M6 3l5 5-5 5" />
                             </svg>
                         </button>
                     </div>
-                    <div class="service-detail-right">
-                        <ul class="service-capabilities">
-                            <li>Build full-stack applications with modern frameworks and proper separation of concerns
-                            </li>
-                            <li>Implement responsive interfaces that work across devices and browsers</li>
-                            <li>Create authentication and authorization systems with proper security controls</li>
-                            <li>Design database schemas and write efficient queries for data persistence</li>
-                            <li>Establish code quality standards and implement automated testing</li>
-                            <li>Document application architecture and maintain technical specifications</li>
-                        </ul>
+                    <div class="service-image">
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
+                            alt="Web Development" loading="lazy">
                     </div>
                 </div>
             </div>
         </section>
 
+        <!-- HOW WE WORK SECTION -->
         <section class="how-we-work">
             <div class="container">
-                <div class="section-header">
+                <div class="how-we-work-header">
                     <span class="section-label">Our approach</span>
-                    <h2>Engineering principles</h2>
-                    <p>The technical standards that apply across all services we deliver.</p>
+                    <h2>How we work</h2>
+                    <p>Every project follows these principles regardless of which service you need.</p>
                 </div>
-                <div class="principles-grid">
-                    <div class="principle-card">
-                        <h3>Architecture first</h3>
-                        <p>We prioritize robust system design over quick fixes. Solutions are built to handle growth and
-                            change without requiring constant refactoring.</p>
-                    </div>
-                    <div class="principle-card">
-                        <h3>Security by default</h3>
-                        <p>Enterprise-grade security practices are integrated from the start. Authentication,
-                            encryption, and access controls are not afterthoughts.</p>
-                    </div>
-                    <div class="principle-card">
-                        <h3>Long-term thinking</h3>
-                        <p>We optimize for systems that last. Today's architecture decisions affect your operational
-                            capacity for years, so we build accordingly.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="cta-section">
-            <div class="container">
-                <h2>Discuss your requirements</h2>
-                <p>Let's talk about what you're building and how these services can support your infrastructure needs.
-                </p>
-                <a href="contact.html" class="btn-primary">
-                    Get in touch
-                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M6 3l5 5-5 5" />
-                    </svg>
-                </a>
+                <div class="roadmap">
+                    <div class="roadmap-step">
+                        <div class="roadmap-number">01</div>
+                        <div class="roadmap-content">
+                            <h3>Architecture-first</h3>
+                            <p>We design systems before writing code. Proper architecture prevents problems and makes
+                                changes easier.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="roadmap-number">02</div>
+                        <div class="roadmap-content">
+                            <h3>Built to last</h3>
+                            <p>Code your team can work with six months later, with clear patterns and documentation.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="roadmap-number">03</div>
+                        <div class="roadmap-content">
+                            <h3>Measurable outcomes</h3>
+                            <p>Success means concrete improvements: faster times, lower costs, fewer incidents.</p>
+                        </div>
+                    </div>
+                    <div class="roadmap-step">
+                        <div class="roadmap-number">04</div>
+                        <div class="roadmap-content">
+                            <h3>Clear communication</h3>
+                            <p>Technical decisions explained in plain language. No jargon, no surprises.</p>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
     </main>
@@ -875,8 +708,8 @@
             <div class="footer-grid">
                 <div class="footer-section">
                     <h4>Techscale</h4>
-                    <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
-                        scale.</p>
+                    <p>Scale Without Limits.<br><br>Engineering solutions for teams that need infrastructure to work,
+                        not just exist.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
@@ -893,7 +726,7 @@
                     <h4>Company</h4>
                     <ul>
                         <li><a href="about.html">About</a></li>
-                        <li><a href="pricing.html">Products</a></li>
+                        <li><a href="products.html">Products</a></li>
                         <li><a href="contact.html">Contact</a></li>
                     </ul>
                 </div>
@@ -905,10 +738,11 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>© 2025 Techscale. All rights reserved.</p>
+                <p>&copy; 2025 Techscale. All rights reserved.</p>
             </div>
         </div>
     </footer>
+
     <script>
         const toggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.nav-links');
@@ -924,7 +758,7 @@
             }
         };
 
-        function discussService(service) {
+        function contactService(service) {
             window.location.href = `contact.html?service=${encodeURIComponent(service)}`;
         }
     </script>
