@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - Techscale</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --secondary: #0EA5E9;
+            --text: #0F172A;
+            --text-light: #64748B;
+            --bg: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --border: #E2E8F0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        .hero {
+            padding: 180px 0 100px;
+            text-align: center;
+            background: var(--bg-light);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 6vw, 64px);
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -0.02em;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .products {
+            padding: 120px 0;
+        }
+
+        .product {
+            max-width: 900px;
+            margin: 0 auto 100px;
+            padding: 64px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            transition: all 0.3s;
+        }
+
+        .product:hover {
+            border-color: var(--primary);
+            box-shadow: 0 20px 60px rgba(37, 99, 235, 0.12);
+        }
+
+        .product:last-child {
+            margin-bottom: 0;
+        }
+
+        .product-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .product-header h2 {
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.01em;
+        }
+
+        .status-badge {
+            padding: 6px 14px;
+            background: var(--bg-light);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--primary);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .product-description {
+            font-size: 18px;
+            color: var(--text-light);
+            margin-bottom: 32px;
+            line-height: 1.7;
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 40px;
+        }
+
+        .features li {
+            font-size: 16px;
+            color: var(--text);
+            padding: 12px 0;
+            border-bottom: 1px solid var(--border);
+            line-height: 1.6;
+        }
+
+        .features li:last-child {
+            border-bottom: none;
+        }
+
+        .features li::before {
+            content: '→';
+            color: var(--primary);
+            font-weight: 700;
+            margin-right: 12px;
+        }
+
+        .cta-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 14px 28px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 15px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-btn:hover {
+            background: #1D4ED8;
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(37, 99, 235, 0.4);
+        }
+
+        .cta-btn svg {
+            width: 14px;
+            height: 14px;
+        }
+
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 80px 0 32px;
+            margin-top: 100px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 20px;
+                transform: translateX(100%);
+                transition: transform 0.3s;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 140px 0 80px;
+            }
+
+            .products {
+                padding: 60px 0;
+            }
+
+            .product {
+                padding: 40px 24px;
+                margin-bottom: 60px;
+            }
+
+            .product-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .product-header h2 {
+                font-size: 28px;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="Techscale">
+            </a>
+            <button class="menu-toggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="services.html">Services</a></li>
+                <li><a href="pricing.html" class="active">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h1>Products</h1>
+                <p>Internal tools built for security, intelligence, and infrastructure automation. Available to select
+                    clients.</p>
+            </div>
+        </section>
+
+        <section class="products">
+            <div class="container">
+                <div class="product">
+                    <div class="product-header">
+                        <h2>LockBox</h2>
+                        <span class="status-badge">Private Beta</span>
+                    </div>
+                    <p class="product-description">
+                        A secure vault for passwords, API keys, secrets, SSH keys, and encrypted files. Built for teams
+                        that need enterprise-grade security without complexity.
+                    </p>
+                    <ul class="features">
+                        <li>Strong encryption with auto-locking and clipboard protection</li>
+                        <li>Offline-first architecture with local data sovereignty</li>
+                        <li>Manage credentials, SSH keys, certificates, and encrypted documents</li>
+                        <li>Zero-knowledge design with granular access controls</li>
+                    </ul>
+                    <button class="cta-btn" onclick="requestAccess('LockBox')">
+                        Request access
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 3l5 5-5 5" />
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="product">
+                    <div class="product-header">
+                        <h2>Scrapify</h2>
+                        <span class="status-badge">Request Access</span>
+                    </div>
+                    <p class="product-description">
+                        AI-powered web intelligence platform for structured data extraction, research automation, and
+                        multi-source analysis. Built for teams that need accurate, compliant data at scale.
+                    </p>
+                    <ul class="features">
+                        <li>Extract structured data from websites, documents, images, and video content</li>
+                        <li>Parallel scraping with AI-powered summarization and entity extraction</li>
+                        <li>Research workflows with caching, deduplication, and metadata tracking</li>
+                        <li>Compliance-first approach with rate limiting and usage policies</li>
+                    </ul>
+                    <button class="cta-btn" onclick="requestAccess('Scrapify')">
+                        Request access
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 3l5 5-5 5" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Techscale</h4>
+                    <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
+                        scale.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services/ai-automation.html">AI Automation</a></li>
+                        <li><a href="services/api-integration.html">API Integration</a></li>
+                        <li><a href="services/cloud-devops.html">Cloud & DevOps</a></li>
+                        <li><a href="services/performance-cost.html">Performance & Cost</a></li>
+                        <li><a href="services/ui-ux-branding.html">UI/UX & Branding</a></li>
+                        <li><a href="services/web-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:contact.techscale@gmail.com">contact.techscale@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Techscale. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav-links');
+
+        toggle.onclick = (e) => {
+            e.stopPropagation();
+            nav.classList.toggle('active');
+        };
+
+        document.onclick = (e) => {
+            if (!e.target.closest('nav')) {
+                nav.classList.remove('active');
+            }
+        };
+
+        function requestAccess(product) {
+            window.location.href = `contact.html?product=${encodeURIComponent(product)}`;
+        }
+    </script>
+</body>
+
+</html>

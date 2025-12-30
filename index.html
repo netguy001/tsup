@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Techscale - Scale Without Limits</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2563EB;
+            --secondary: #0EA5E9;
+            --text: #0F172A;
+            --text-light: #64748B;
+            --bg: #FFFFFF;
+            --bg-light: #F8FAFC;
+            --border: #E2E8F0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Nav */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid var(--border);
+            z-index: 1000;
+        }
+
+        nav .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 80px;
+        }
+
+        .logo img {
+            height: 80px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 180px 0 120px;
+            background: linear-gradient(180deg, #EFF6FF 0%, #FFFFFF 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 1400px;
+            height: 1400px;
+            background: radial-gradient(circle, rgba(37, 99, 235, 0.08) 0%, transparent 70%);
+            animation: pulse 8s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+
+            0%,
+            100% {
+                transform: translateX(-50%) scale(1);
+                opacity: 0.5;
+            }
+
+            50% {
+                transform: translateX(-50%) scale(1.1);
+                opacity: 0.8;
+            }
+        }
+
+        .hero-content {
+            position: relative;
+            max-width: 900px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 50px;
+            font-size: 14px;
+            margin-bottom: 32px;
+            box-shadow: 0 2px 8px rgba(37, 99, 235, 0.1);
+        }
+
+        .hero-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--primary);
+            border-radius: 50%;
+            animation: blink 2s infinite;
+        }
+
+        @keyframes blink {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            50% {
+                opacity: 0.3;
+            }
+        }
+
+        .hero h1 {
+            font-size: clamp(48px, 7vw, 72px);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            letter-spacing: -0.02em;
+        }
+
+        .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 20px;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 680px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 16px 32px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 14px rgba(37, 99, 235, 0.3);
+        }
+
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Services */
+        section {
+            padding: 100px 0;
+        }
+
+        .section-header {
+            max-width: 700px;
+            margin: 0 auto 60px;
+            text-align: center;
+        }
+
+        .section-label {
+            display: inline-block;
+            font-size: 13px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--primary);
+            margin-bottom: 16px;
+        }
+
+        .section-header h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-header p {
+            font-size: 18px;
+            color: var(--text-light);
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+        }
+
+        .card {
+            background: var(--bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 32px;
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 16px 16px 0 0;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 10px 40px rgba(37, 99, 235, 0.15);
+            transform: translateY(-5px);
+        }
+
+        .card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+            transition: all 0.3s;
+        }
+
+        .icon img {
+            width: 40px;
+            height: 40px;
+        }
+
+        .card:hover .icon {
+            transform: scale(1.1);
+            background: linear-gradient(135deg, rgba(37, 99, 235, 0.1), rgba(14, 165, 233, 0.1));
+        }
+
+        .card h3 {
+            font-size: 20px;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            font-size: 15px;
+        }
+
+        .card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .card a svg {
+            width: 14px;
+            height: 14px;
+            transition: transform 0.3s;
+        }
+
+        .card:hover a svg {
+            transform: translateX(4px);
+        }
+
+        /* Why Section */
+        .why-section {
+            background: var(--bg-light);
+            border-top: 1px solid var(--border);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 80px;
+        }
+
+        .features {
+            display: flex;
+            flex-direction: column;
+            gap: 60px;
+            margin-bottom: 80px;
+            position: relative;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            opacity: 0.3;
+            transform: translateX(-50%);
+        }
+
+        .feature {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 40px;
+            align-items: center;
+            position: relative;
+        }
+
+        .feature:nth-child(odd) .feature-content {
+            grid-column: 1;
+            text-align: right;
+        }
+
+        .feature:nth-child(odd) .feature-number {
+            grid-column: 2;
+        }
+
+        .feature:nth-child(odd) .feature-empty {
+            grid-column: 3;
+        }
+
+        .feature:nth-child(even) .feature-empty {
+            grid-column: 1;
+        }
+
+        .feature:nth-child(even) .feature-number {
+            grid-column: 2;
+        }
+
+        .feature:nth-child(even) .feature-content {
+            grid-column: 3;
+            text-align: left;
+        }
+
+        .feature-number {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 48px;
+            height: 48px;
+            font-size: 16px;
+            font-weight: 700;
+            color: white;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 50%;
+            position: relative;
+            z-index: 2;
+            box-shadow: 0 4px 16px rgba(37, 99, 235, 0.4);
+            flex-shrink: 0;
+        }
+
+        .feature-content {
+            padding: 24px;
+            background: white;
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .feature-empty {
+            height: 1px;
+        }
+
+        @media (max-width: 768px) {
+            .features::before {
+                left: 24px;
+            }
+
+            .feature {
+                grid-template-columns: auto 1fr;
+                gap: 20px;
+            }
+
+            .feature:nth-child(odd) .feature-content,
+            .feature:nth-child(even) .feature-content {
+                grid-column: 2;
+                text-align: left;
+            }
+
+            .feature:nth-child(odd) .feature-number,
+            .feature:nth-child(even) .feature-number {
+                grid-column: 1;
+            }
+
+            .feature-empty {
+                display: none;
+            }
+        }
+
+        .feature h3 {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature p {
+            color: var(--text-light);
+            font-size: 15px;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            padding-top: 60px;
+            border-top: 1px solid var(--border);
+        }
+
+        .stat {
+            text-align: center;
+            padding: 30px;
+            background: var(--bg);
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            transition: all 0.3s;
+        }
+
+        .stat:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(37, 99, 235, 0.1);
+        }
+
+        .stat h4 {
+            font-size: 56px;
+            font-weight: 700;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 8px;
+        }
+
+        .stat p {
+            color: var(--text-light);
+            font-size: 16px;
+        }
+
+        /* CTA */
+        .cta {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            text-align: center;
+            border-radius: 20px;
+            margin: 0 24px;
+            padding: 80px 40px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), transparent);
+            animation: float 15s infinite;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-30px);
+            }
+        }
+
+        .cta h2 {
+            font-size: clamp(32px, 5vw, 48px);
+            margin-bottom: 16px;
+        }
+
+        .cta p {
+            font-size: 20px;
+            margin-bottom: 32px;
+            opacity: 0.95;
+        }
+
+        .cta .btn {
+            background: white;
+            color: var(--primary);
+        }
+
+        .cta .btn:hover {
+            background: var(--bg-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text);
+            color: white;
+            padding: 80px 0 32px;
+            margin-top: 100px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr repeat(3, 1fr);
+            gap: 60px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h4 {
+            font-size: 14px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            opacity: 0.6;
+            letter-spacing: 0.05em;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 12px;
+        }
+
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-section p {
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.6;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 32px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            opacity: 0.5;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                position: fixed;
+                top: 80px;
+                left: 0;
+                right: 0;
+                background: white;
+                flex-direction: column;
+                gap: 0;
+                padding: 20px;
+                transform: translateX(100%);
+                transition: transform 0.3s;
+                box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+            }
+
+            .nav-links.active {
+                transform: translateX(0);
+            }
+
+            .nav-links a {
+                padding: 12px 0;
+                border-bottom: 1px solid var(--border);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            .hero {
+                padding: 140px 0 80px;
+            }
+
+            section {
+                padding: 60px 0;
+            }
+
+            .grid,
+            .features,
+            .stats {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .cta {
+                margin: 0 16px;
+                padding: 60px 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <div class="container">
+            <a href="index.html" class="logo">
+                <img src="assets/img/logo.png" alt="Techscale">
+            </a>
+            <button class="menu-toggle">☰</button>
+            <ul class="nav-links">
+                <li><a href="services.html">Services</a></li>
+                <li><a href="products.html">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <div class="hero-badge">Enterprise infrastructure solutions</div>
+                    <h1>Infrastructure for companies<br>that need to <span class="gradient-text">scale</span></h1>
+                    <p>We build the technology foundations that power growth—from intelligent automation to cloud
+                        infrastructure, designed for reliability at any scale.</p>
+                    <a href="contact.html" class="btn">
+                        Start building
+                        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 3l5 5-5 5" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">Core capabilities</span>
+                    <h2>Technology solutions that remove complexity</h2>
+                    <p>From automation to infrastructure, we build systems that let you focus on your business, not your
+                        stack.</p>
+                </div>
+                <div class="grid">
+                    <div class="card">
+                        <div class="icon">
+                            <img src="assets/img/1.png" alt="AI">
+                        </div>
+                        <h3>AI Automation</h3>
+                        <p>Deploy intelligent workflows that eliminate manual processes and reduce operational overhead
+                            across your organization.</p>
+                        <a href="services/ai-automation.html">
+                            Learn more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3l5 5-5 5" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            <img src="assets/img/2.png" alt="API">
+                        </div>
+                        <h3>API Integration</h3>
+                        <p>Connect disparate systems with reliable, scalable integrations built on enterprise-grade API
+                            architecture.</p>
+                        <a href="services/api-integration.html">
+                            Learn more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3l5 5-5 5" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            <img src="assets/img/3.png" alt="Cloud">
+                        </div>
+                        <h3>Cloud & DevOps</h3>
+                        <p>Design and operate infrastructure that handles growth without increasing complexity or
+                            maintenance burden.</p>
+                        <a href="services/cloud-devops.html">
+                            Learn more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3l5 5-5 5" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            <img src="assets/img/4.png" alt="Performance">
+                        </div>
+                        <h3>Performance Optimization</h3>
+                        <p>Reduce cloud spend and improve system performance through architectural improvements and
+                            resource efficiency.</p>
+                        <a href="services/performance-cost.html">
+                            Learn more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3l5 5-5 5" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            <img src="assets/img/5.png" alt="UI/UX">
+                        </div>
+                        <h3>UI/UX & Branding</h3>
+                        <p>Design interfaces that users understand immediately and brands that communicate value clearly
+                            and consistently.</p>
+                        <a href="services/ui-ux-branding.html">
+                            Learn more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3l5 5-5 5" />
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="card">
+                        <div class="icon">
+                            <img src="assets/img/6.png" alt="Web">
+                        </div>
+                        <h3>Web Development</h3>
+                        <p>Build applications with clean architecture that's maintainable and performant as your team
+                            and user base grows.</p>
+                        <a href="services/web-development.html">
+                            Learn more
+                            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M6 3l5 5-5 5" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-section">
+            <div class="container">
+                <div class="section-header">
+                    <span class="section-label">Our approach</span>
+                    <h2>Engineering principles that scale</h2>
+                    <p>We work with businesses that need technology they can depend on as they grow.</p>
+                </div>
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-content">
+                            <h3>Architecture first</h3>
+                            <p>We prioritize robust system design over quick fixes, building foundations that support
+                                long-term growth.</p>
+                        </div>
+                        <div class="feature-number">01</div>
+                        <div class="feature-empty"></div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-empty"></div>
+                        <div class="feature-number">02</div>
+                        <div class="feature-content">
+                            <h3>Security by default</h3>
+                            <p>Enterprise-grade security practices are integrated into every solution from day one, not
+                                added later.</p>
+                        </div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-content">
+                            <h3>Battle-tested patterns</h3>
+                            <p>Infrastructure approaches proven across industries, from early-stage startups to
+                                enterprise scale.</p>
+                        </div>
+                        <div class="feature-number">03</div>
+                        <div class="feature-empty"></div>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-empty"></div>
+                        <div class="feature-number">04</div>
+                        <div class="feature-content">
+                            <h3>Measurable outcomes</h3>
+                            <p>Success measured by operational improvements, system reliability, and tangible business
+                                impact.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="stats">
+                    <div class="stat">
+                        <h4>99.9%</h4>
+                        <p>Uptime SLA</p>
+                    </div>
+                    <div class="stat">
+                        <h4>50+</h4>
+                        <p>Enterprise clients</p>
+                    </div>
+                    <div class="stat">
+                        <h4>24/7</h4>
+                        <p>Support available</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta">
+            <div class="container">
+                <h2>Ready to build infrastructure that scales?</h2>
+                <p>Let's discuss how we can support your growth with technology that works.</p>
+                <a href="contact.html" class="btn">
+                    Get in touch
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M6 3l5 5-5 5" />
+                    </svg>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-section">
+                    <h4>Techscale</h4>
+                    <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
+                        scale.</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Services</h4>
+                    <ul>
+                        <li><a href="services/ai-automation.html">AI Automation</a></li>
+                        <li><a href="services/api-integration.html">API Integration</a></li>
+                        <li><a href="services/cloud-devops.html">Cloud & DevOps</a></li>
+                        <li><a href="services/performance-cost.html">Performance & Cost</a></li>
+                        <li><a href="services/ui-ux-branding.html">UI/UX & Branding</a></li>
+                        <li><a href="services/web-development.html">Web Development</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="products.html">Products</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="mailto:contact.techscale@gmail.com">contact.techscale@gmail.com</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Techscale. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const nav = document.querySelector('.nav-links');
+
+        toggle.onclick = (e) => {
+            e.stopPropagation();
+            nav.classList.toggle('active');
+        };
+
+        document.onclick = (e) => {
+            if (!e.target.closest('nav')) {
+                nav.classList.remove('active');
+            }
+        };
+    </script>
+</body>
+
+</html>
