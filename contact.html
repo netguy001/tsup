@@ -47,6 +47,11 @@
             backdrop-filter: blur(10px);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        nav.nav-hidden {
+            transform: translateY(-100%);
         }
 
         nav .container {
@@ -117,7 +122,7 @@
         }
 
         .contact-section.direct-entry {
-            padding-top: clamp(120px, 15vw, 140px);
+            padding-top: clamp(100px, 12vw, 120px);
         }
 
         .contact-grid {
@@ -223,7 +228,7 @@
         }
 
         .btn:disabled {
-            opacity: 0.5;
+            opacity: 0.6;
             cursor: not-allowed;
             transform: none;
         }
@@ -256,14 +261,23 @@
             background: #D1FAE5;
             color: #065F46;
             border: 1px solid #10B981;
-            display: block;
         }
 
         .message.error {
             background: #FEE2E2;
             color: #991B1B;
             border: 1px solid #EF4444;
+        }
+
+        .message.show {
             display: block;
+        }
+
+        .data-notice {
+            font-size: clamp(12px, 2vw, 13px);
+            color: var(--text-light);
+            margin-top: clamp(12px, 2vw, 16px);
+            text-align: center;
         }
 
         .info-container {
@@ -430,6 +444,16 @@
                 gap: 40px;
             }
         }
+
+        @media (max-width: 480px) {
+            .page-hero {
+                padding-top: clamp(100px, 15vw, 120px);
+            }
+
+            .contact-section.direct-entry {
+                padding-top: 90px;
+            }
+        }
     </style>
 </head>
 
@@ -439,7 +463,7 @@
             <a href="index.html" class="logo">
                 <img src="assets/img/logo.png" alt="Techscale">
             </a>
-            <button class="menu-toggle">☰</button>
+            <button class="menu-toggle" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="services.html">Services</a></li>
@@ -474,7 +498,12 @@
                                 href="mailto:contact.techscale@gmail.com">contact.techscale@gmail.com</a>
                         </div>
 
-                        <form id="contactForm">
+                        <form id="contactForm" action="https://formsubmit.co/contact.techscale@gmail.com" method="POST">
+                            <input type="hidden" name="_subject" value="New inquiry from Techscale website">
+                            <input type="hidden" name="_captcha" value="false">
+                            <input type="hidden" name="_template" value="table">
+                            <input type="hidden" name="_next" value="https://techscale.com/contact.html?success=true">
+
                             <div class="form-group">
                                 <label for="name">Full name</label>
                                 <input type="text" id="name" name="name" required placeholder="Your name">
@@ -496,11 +525,11 @@
                                 <label for="inquiryType">Inquiry type</label>
                                 <select id="inquiryType" name="inquiryType" required>
                                     <option value="">Select inquiry type</option>
-                                    <option value="service">Service inquiry</option>
-                                    <option value="product-lockbox">Product access - LockBox</option>
-                                    <option value="product-scrapify">Product access - Scrapify</option>
-                                    <option value="demo">Demo request</option>
-                                    <option value="general">General discussion</option>
+                                    <option value="Service inquiry">Service inquiry</option>
+                                    <option value="Product access - LockBox">Product access - LockBox</option>
+                                    <option value="Product access - Scrapify">Product access - Scrapify</option>
+                                    <option value="Demo request">Demo request</option>
+                                    <option value="General discussion">General discussion</option>
                                 </select>
                             </div>
 
@@ -512,7 +541,7 @@
 
                             <div class="form-actions">
                                 <button type="submit" class="btn" id="submitBtn">
-                                    Send message
+                                    <span id="btnText">Send message</span>
                                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
                                         <path d="M6 3l5 5-5 5" />
                                     </svg>
@@ -521,6 +550,7 @@
                                     Email directly
                                 </button>
                             </div>
+                            <p class="data-notice">We only use this information to respond to your request.</p>
                         </form>
                     </div>
 
@@ -590,7 +620,6 @@
     </footer>
 
     <script>
-        // Mobile menu toggle
         const toggle = document.querySelector('.menu-toggle');
         const nav = document.querySelector('.nav-links');
 
@@ -605,103 +634,89 @@
             }
         };
 
-        // Parse URL parameters
         const urlParams = new URLSearchParams(window.location.search);
-        const service = urlParams.get('service');
-        const product = urlParams.get('product');
-        const type = urlParams.get('type');
+        const service = urlParams.get('service')?.trim().toLowerCase();
+        const product = urlParams.get('product')?.trim().toLowerCase();
+        const type = urlParams.get('type')?.trim().toLowerCase();
+        const successParam = urlParams.get('success');
 
-        // Check if we have any parameters - if yes, hide hero and scroll to form
+        if (successParam === 'true') {
+            const successMsg = document.getElementById('successMessage');
+            successMsg.classList.add('show');
+            setTimeout(() => {
+                successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
         const hasParams = service || product || type;
         const pageHero = document.querySelector('.page-hero');
         const contactSection = document.querySelector('.contact-section');
 
         if (hasParams) {
-            // Hide hero section
             pageHero.classList.add('hidden');
-            // Add direct entry class for proper padding
             contactSection.classList.add('direct-entry');
-            // Scroll to form after a brief delay
-            setTimeout(() => {
-                document.getElementById('contactForm').scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+            window.addEventListener('load', () => {
+                const formContainer = document.querySelector('.form-container');
+                formContainer.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            });
         }
 
-        // Pre-fill inquiry type based on URL parameters
         const inquiryTypeSelect = document.getElementById('inquiryType');
         const messageTextarea = document.getElementById('message');
 
-        if (product) {
-            if (product.toLowerCase() === 'lockbox') {
-                inquiryTypeSelect.value = type === 'demo' ? 'demo' : 'product-lockbox';
-                if (type === 'demo') {
-                    messageTextarea.value = 'I would like to request a demo of LockBox.\n\n';
-                } else {
-                    messageTextarea.value = 'I would like to request access to LockBox.\n\n';
-                }
-            } else if (product.toLowerCase() === 'scrapify') {
-                inquiryTypeSelect.value = type === 'demo' ? 'demo' : 'product-scrapify';
-                if (type === 'demo') {
-                    messageTextarea.value = 'I would like to request a demo of Scrapify.\n\n';
-                } else {
-                    messageTextarea.value = 'I would like to request access to Scrapify.\n\n';
-                }
-            }
+        if (product === 'lockbox') {
+            inquiryTypeSelect.value = type === 'demo' ? 'Demo request' : 'Product access - LockBox';
+            messageTextarea.value = type === 'demo'
+                ? 'I would like to request a demo of LockBox.\n\n'
+                : 'I would like to request access to LockBox.\n\n';
+        } else if (product === 'scrapify') {
+            inquiryTypeSelect.value = type === 'demo' ? 'Demo request' : 'Product access - Scrapify';
+            messageTextarea.value = type === 'demo'
+                ? 'I would like to request a demo of Scrapify.\n\n'
+                : 'I would like to request access to Scrapify.\n\n';
         } else if (service) {
-            inquiryTypeSelect.value = 'service';
-            messageTextarea.value = `I'm interested in your ${service} service.\n\n`;
+            inquiryTypeSelect.value = 'Service inquiry';
+            const serviceName = service.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+            messageTextarea.value = `I'm interested in your ${serviceName} service.\n\n`;
         } else if (type === 'demo') {
-            inquiryTypeSelect.value = 'demo';
+            inquiryTypeSelect.value = 'Demo request';
         }
 
-        // Email directly button
         document.getElementById('emailBtn').addEventListener('click', () => {
             const subject = 'Inquiry from Techscale website';
             const body = 'Please tell us about your project or requirements...';
             window.location.href = `mailto:contact.techscale@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
 
-        // Form submission
         const form = document.getElementById('contactForm');
         const submitBtn = document.getElementById('submitBtn');
-        const successMsg = document.getElementById('successMessage');
-        const errorMsg = document.getElementById('errorMessage');
+        const btnText = document.getElementById('btnText');
 
-        form.addEventListener('submit', async (e) => {
-            e.preventDefault();
-
-            // Hide any existing messages
-            successMsg.style.display = 'none';
-            errorMsg.style.display = 'none';
-
-            // Disable submit button
+        form.addEventListener('submit', (e) => {
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Sending...';
+            btnText.textContent = 'Sending...';
+        });
+        // Auto-hide navbar on scroll
+        let lastScroll = 0;
+        const navbar = document.querySelector('nav');
 
-            // Simulate form submission (replace with actual endpoint)
-            try {
-                // In production, replace this with actual form submission to backend
-                await new Promise(resolve => setTimeout(resolve, 1000));
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
 
-                // Show success message
-                successMsg.style.display = 'block';
-                form.reset();
-
-                // Scroll to success message
-                successMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-                // Re-enable submit button
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Send message <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" /></svg>';
-            } catch (error) {
-                // Show error message
-                errorMsg.style.display = 'block';
-                errorMsg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-
-                // Re-enable submit button
-                submitBtn.disabled = false;
-                submitBtn.innerHTML = 'Send message <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 3l5 5-5 5" /></svg>';
+            if (currentScroll <= 0) {
+                navbar.classList.remove('nav-hidden');
+                return;
             }
+
+            if (currentScroll > lastScroll && currentScroll > 100) {
+                // Scrolling DOWN - hide navbar
+                navbar.classList.add('nav-hidden');
+            } else if (currentScroll < lastScroll) {
+                // Scrolling UP - show navbar
+                navbar.classList.remove('nav-hidden');
+            }
+
+            lastScroll = currentScroll;
         });
     </script>
 </body>
