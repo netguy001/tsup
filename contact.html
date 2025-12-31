@@ -250,17 +250,24 @@
         }
 
         .message {
-            padding: clamp(12px, 2vw, 16px);
-            border-radius: 8px;
-            margin-bottom: clamp(16px, 3vw, 20px);
-            font-size: clamp(14px, 2vw, 15px);
+            padding: clamp(16px, 3vw, 20px);
+            border-radius: 12px;
+            margin-bottom: clamp(20px, 3vw, 24px);
+            font-size: clamp(15px, 2.5vw, 16px);
             display: none;
+            text-align: center;
         }
 
         .message.success {
             background: #D1FAE5;
             color: #065F46;
-            border: 1px solid #10B981;
+            border: 2px solid #10B981;
+        }
+
+        .message.success h3 {
+            font-size: clamp(18px, 3vw, 20px);
+            margin-bottom: 8px;
+            color: #065F46;
         }
 
         .message.error {
@@ -398,7 +405,6 @@
             height: auto;
             margin-bottom: 20px;
             filter: brightness(0) invert(1);
-            /* This makes it WHITE */
         }
 
         .footer-logo img {
@@ -509,7 +515,8 @@
                         <p class="subtitle">We respond to serious inquiries within 24 hours during business days.</p>
 
                         <div id="successMessage" class="message success">
-                            Thank you for reaching out. We'll review your request and respond within 24 hours.
+                            <h3>✓ Message sent successfully!</h3>
+                            <p>Thank you for reaching out. Our team will contact you within 24 hours.</p>
                         </div>
 
                         <div id="errorMessage" class="message error">
@@ -521,8 +528,10 @@
                             <input type="hidden" name="_subject" value="New inquiry from Techscale website">
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_next" value="/contact.html?success=true">
-
+                            <input type="hidden" name="_next"
+                                value="https://comfy-zabaione-bd99d7.netlify.app/contact.html?success=true">
+                            <input type="hidden" name="_autoresponse"
+                                value="Thank you for contacting Techscale! We have received your message and will get back to you within 24 hours.">
 
                             <div class="form-group">
                                 <label for="name">Full name</label>
@@ -532,6 +541,15 @@
                             <div class="form-group">
                                 <label for="email">Email address</label>
                                 <input type="email" id="email" name="email" required placeholder="you@company.com">
+                                <span id="emailError"
+                                    style="color: #EF4444; font-size: 13px; display: none; margin-top: 4px;">Please
+                                    enter a valid email address (e.g., name@example.com)</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="phone">Phone number <span class="optional">(optional)</span></label>
+                                <input type="tel" id="phone" name="phone"
+                                    placeholder="+1 234 567 8900 or +91 98765 43210">
                             </div>
 
                             <div class="form-group">
@@ -679,6 +697,10 @@
             btnText.textContent = 'Message sent!';
             submitBtn.style.background = '#10B981';
             submitBtn.disabled = true;
+
+            // Hide the form after successful submission
+            form.style.display = 'none';
+
             setTimeout(() => {
                 successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
@@ -757,10 +779,85 @@
             window.location.href = `mailto:contact.techscale@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
 
-        // Form submit handling
+        // Form submit handling with STRICT email validation
         form.addEventListener('submit', (e) => {
+            const emailInput = document.getElementById('email');
+            const emailError = document.getElementById('emailError');
+            const emailValue = emailInput.value.trim();
+
+            // Very strict email validation - must have proper domain extension
+            const strictEmailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
+            // Additional check: must have at least one dot after @
+            const parts = emailValue.split('@');
+            const hasValidDomain = parts.length === 2 && parts[1].includes('.') && parts[1].split('.')[1].length >= 2;
+
+            // Check if email matches pattern and has proper domain
+            if (!strictEmailPattern.test(emailValue) || !hasValidDomain) {
+                e.preventDefault();
+                emailError.style.display = 'block';
+                emailError.textContent = 'Please enter a complete email address (e.g., name@example.com)';
+                emailInput.style.borderColor = '#EF4444';
+                emailInput.focus();
+                return false;
+            }
+
+            // Check for common invalid/test domains
+            const invalidDomains = ['@test', '@fake', '@example.com', '@domain', '@gmail', '@yahoo', '@outlook', 'test.com', 'fake.com'];
+            const lowerEmail = emailValue.toLowerCase();
+
+            // Block incomplete Gmail/Yahoo/Outlook addresses
+            if (lowerEmail.includes('@gmail') && !lowerEmail.endsWith('@gmail.com')) {
+                e.preventDefault();
+                emailError.style.display = 'block';
+                emailError.textContent = 'Did you mean @gmail.com?';
+                emailInput.style.borderColor = '#EF4444';
+                emailInput.focus();
+                return false;
+            }
+
+            if (lowerEmail.includes('@yahoo') && !lowerEmail.endsWith('@yahoo.com')) {
+                e.preventDefault();
+                emailError.style.display = 'block';
+                emailError.textContent = 'Did you mean @yahoo.com?';
+                emailInput.style.borderColor = '#EF4444';
+                emailInput.focus();
+                return false;
+            }
+
+            if (lowerEmail.includes('@outlook') && !lowerEmail.endsWith('@outlook.com')) {
+                e.preventDefault();
+                emailError.style.display = 'block';
+                emailError.textContent = 'Did you mean @outlook.com?';
+                emailInput.style.borderColor = '#EF4444';
+                emailInput.focus();
+                return false;
+            }
+
+            // Block obvious fake emails
+            const hasFakeDomain = invalidDomains.some(domain => lowerEmail.includes(domain));
+            if (hasFakeDomain) {
+                e.preventDefault();
+                emailError.style.display = 'block';
+                emailError.textContent = 'Please use a real email address so we can respond to you.';
+                emailInput.style.borderColor = '#EF4444';
+                emailInput.focus();
+                return false;
+            }
+
+            // Hide error if validation passes
+            emailError.style.display = 'none';
+            emailInput.style.borderColor = '';
+
             submitBtn.disabled = true;
             btnText.textContent = 'Sending...';
+        });
+
+        // Clear error on typing
+        document.getElementById('email').addEventListener('input', function () {
+            const emailError = document.getElementById('emailError');
+            emailError.style.display = 'none';
+            this.style.borderColor = '';
         });
 
         // Auto-hide navbar on scroll
@@ -783,16 +880,6 @@
 
             lastScroll = currentScroll;
         });
-        const params = new URLSearchParams(window.location.search);
-        if (params.get('success') === 'true') {
-            const form = document.querySelector('form');
-            form.innerHTML = `
-      <div class="success-box">
-        <h2>Message sent successfully</h2>
-        <p>We’ve received your request and will respond within 24 hours.</p>
-      </div>
-    `;
-        }
     </script>
 </body>
 
