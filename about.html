@@ -455,6 +455,20 @@
             font-size: clamp(13px, 2vw, 14px);
         }
 
+        .footer-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+            /* This makes it WHITE */
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -558,8 +572,7 @@
             <div class="container">
                 <div class="story-grid">
                     <div class="story-image">
-                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=800&q=80"
-                            alt="Team collaboration" loading="lazy">
+                        <img src="assets/img/ab.png" alt="Team collaboration" loading="lazy">
                     </div>
                     <div class="story-content">
                         <span class="section-label">Who we are</span>
@@ -643,19 +656,19 @@
                 <div class="team-grid">
                     <div class="team-card">
                         <div class="team-avatar">RK</div>
-                        <h4>Rajesh Kumar</h4>
+                        <h4>Meganathan M</h4>
                         <span class="team-role">Founder & Lead Architect</span>
                         <p>15+ years building distributed systems for fintech and enterprise infrastructure.</p>
                     </div>
                     <div class="team-card">
                         <div class="team-avatar">PS</div>
-                        <h4>Priya Sharma</h4>
+                        <h4>Aravindhan V </h4>
                         <span class="team-role">Head of Engineering</span>
                         <p>Former tech lead at cloud infrastructure companies, specializes in automation and DevOps.</p>
                     </div>
                     <div class="team-card">
                         <div class="team-avatar">AM</div>
-                        <h4>Arjun Mehta</h4>
+                        <h4>Chandru V</h4>
                         <span class="team-role">Security & Operations</span>
                         <p>Background in cybersecurity and compliance, ensures systems meet enterprise security
                             standards.</p>
@@ -682,7 +695,9 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>Techscale</h4>
+                    <div class="footer-logo">
+                        <img src="assets/img/logo.png" alt="Techscale">
+                    </div>
                     <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
                         scale.</p>
                 </div>

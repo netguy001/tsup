@@ -393,6 +393,20 @@
             font-size: clamp(13px, 2vw, 14px);
         }
 
+        .footer-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+            /* This makes it WHITE */
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -443,6 +457,11 @@
                 grid-template-columns: 1fr;
                 gap: 40px;
             }
+        }
+
+        .contact-info {
+            max-height: calc(100vh - 120px);
+            overflow-y: auto;
         }
 
         @media (max-width: 480px) {
@@ -502,7 +521,8 @@
                             <input type="hidden" name="_subject" value="New inquiry from Techscale website">
                             <input type="hidden" name="_captcha" value="false">
                             <input type="hidden" name="_template" value="table">
-                            <input type="hidden" name="_next" value="https://techscale.com/contact.html?success=true">
+                            <input type="hidden" name="_next" value="/contact.html?success=true">
+
 
                             <div class="form-group">
                                 <label for="name">Full name</label>
@@ -583,7 +603,9 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>Techscale</h4>
+                    <div class="footer-logo">
+                        <img src="assets/img/logo.png" alt="Techscale">
+                    </div>
                     <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
                         scale.</p>
                 </div>
@@ -634,24 +656,36 @@
             }
         };
 
+        // Get URL parameters
         const urlParams = new URLSearchParams(window.location.search);
         const service = urlParams.get('service')?.trim().toLowerCase();
         const product = urlParams.get('product')?.trim().toLowerCase();
         const type = urlParams.get('type')?.trim().toLowerCase();
         const successParam = urlParams.get('success');
 
+        // Get DOM elements
+        const inquiryTypeSelect = document.getElementById('inquiryType');
+        const messageTextarea = document.getElementById('message');
+        const form = document.getElementById('contactForm');
+        const submitBtn = document.getElementById('submitBtn');
+        const btnText = document.getElementById('btnText');
+        const pageHero = document.querySelector('.page-hero');
+        const contactSection = document.querySelector('.contact-section');
+
+        // Show success message if form was submitted
         if (successParam === 'true') {
             const successMsg = document.getElementById('successMessage');
             successMsg.classList.add('show');
+            btnText.textContent = 'Message sent!';
+            submitBtn.style.background = '#10B981';
+            submitBtn.disabled = true;
             setTimeout(() => {
                 successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
             }, 100);
         }
 
+        // Handle pre-filling from service/product pages
         const hasParams = service || product || type;
-        const pageHero = document.querySelector('.page-hero');
-        const contactSection = document.querySelector('.contact-section');
-
         if (hasParams) {
             pageHero.classList.add('hidden');
             contactSection.classList.add('direct-entry');
@@ -661,41 +695,74 @@
             });
         }
 
-        const inquiryTypeSelect = document.getElementById('inquiryType');
-        const messageTextarea = document.getElementById('message');
-
+        // Pre-fill form based on URL parameters
         if (product === 'lockbox') {
             inquiryTypeSelect.value = type === 'demo' ? 'Demo request' : 'Product access - LockBox';
             messageTextarea.value = type === 'demo'
-                ? 'I would like to request a demo of LockBox.\n\n'
-                : 'I would like to request access to LockBox.\n\n';
+                ? 'I would like to request a demo of LockBox.\n\nInterested in learning about:\n- '
+                : 'I would like to request access to LockBox.\n\nMy use case:\n- ';
         } else if (product === 'scrapify') {
             inquiryTypeSelect.value = type === 'demo' ? 'Demo request' : 'Product access - Scrapify';
             messageTextarea.value = type === 'demo'
-                ? 'I would like to request a demo of Scrapify.\n\n'
-                : 'I would like to request access to Scrapify.\n\n';
+                ? 'I would like to request a demo of Scrapify.\n\nInterested in learning about:\n- '
+                : 'I would like to request access to Scrapify.\n\nMy research purpose:\n- ';
         } else if (service) {
             inquiryTypeSelect.value = 'Service inquiry';
             const serviceName = service.split(' ').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
-            messageTextarea.value = `I'm interested in your ${serviceName} service.\n\n`;
+            messageTextarea.value = `I'm interested in your ${serviceName} service.\n\nPlease provide details about:\n- `;
         } else if (type === 'demo') {
             inquiryTypeSelect.value = 'Demo request';
+            messageTextarea.value = 'I would like to request a demo.\n\nInterested in:\n- ';
         }
 
+        // Handle inquiry type change to auto-fill message template
+        inquiryTypeSelect.addEventListener('change', function () {
+            const selectedType = this.value;
+            const currentMessage = messageTextarea.value.trim();
+
+            // Check if message is empty or contains a template pattern
+            const isTemplateOrEmpty = !currentMessage ||
+                currentMessage.includes("I'm interested in") ||
+                currentMessage.includes("I would like to request") ||
+                currentMessage.includes("I would like to discuss");
+
+            // Only update if empty or already a template
+            if (isTemplateOrEmpty) {
+                switch (selectedType) {
+                    case 'Service inquiry':
+                        messageTextarea.value = "I'm interested in discussing your services.\n\nPlease provide details about:\n- ";
+                        break;
+                    case 'Product access - LockBox':
+                        messageTextarea.value = "I would like to request access to LockBox.\n\nMy use case:\n- ";
+                        break;
+                    case 'Product access - Scrapify':
+                        messageTextarea.value = "I would like to request access to Scrapify.\n\nMy research purpose:\n- ";
+                        break;
+                    case 'Demo request':
+                        messageTextarea.value = "I would like to request a demo.\n\nInterested in:\n- ";
+                        break;
+                    case 'General discussion':
+                        messageTextarea.value = "I would like to discuss:\n\n";
+                        break;
+                    default:
+                        messageTextarea.value = "";
+                }
+            }
+        });
+
+        // Email directly button
         document.getElementById('emailBtn').addEventListener('click', () => {
             const subject = 'Inquiry from Techscale website';
             const body = 'Please tell us about your project or requirements...';
             window.location.href = `mailto:contact.techscale@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         });
 
-        const form = document.getElementById('contactForm');
-        const submitBtn = document.getElementById('submitBtn');
-        const btnText = document.getElementById('btnText');
-
+        // Form submit handling
         form.addEventListener('submit', (e) => {
             submitBtn.disabled = true;
             btnText.textContent = 'Sending...';
         });
+
         // Auto-hide navbar on scroll
         let lastScroll = 0;
         const navbar = document.querySelector('nav');
@@ -709,15 +776,23 @@
             }
 
             if (currentScroll > lastScroll && currentScroll > 100) {
-                // Scrolling DOWN - hide navbar
                 navbar.classList.add('nav-hidden');
             } else if (currentScroll < lastScroll) {
-                // Scrolling UP - show navbar
                 navbar.classList.remove('nav-hidden');
             }
 
             lastScroll = currentScroll;
         });
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('success') === 'true') {
+            const form = document.querySelector('form');
+            form.innerHTML = `
+      <div class="success-box">
+        <h2>Message sent successfully</h2>
+        <p>We’ve received your request and will respond within 24 hours.</p>
+      </div>
+    `;
+        }
     </script>
 </body>
 

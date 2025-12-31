@@ -587,6 +587,20 @@
             opacity: 0.5;
         }
 
+        .footer-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+            /* This makes it WHITE */
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -890,9 +904,11 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>Techscale</h4>
-                    <p>Scale Without Limits.<br><br>Engineering solutions for teams that need infrastructure to work,
-                        not just exist.</p>
+                    <div class="footer-logo">
+                        <img src="assets/img/logo.png" alt="Techscale">
+                    </div>
+                    <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
+                        scale.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>

@@ -352,6 +352,20 @@
             font-size: clamp(13px, 2vw, 14px);
         }
 
+        .footer-logo {
+            width: 180px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: brightness(0) invert(1);
+            /* This makes it WHITE */
+        }
+
+        .footer-logo img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
         @media (max-width: 768px) {
             .nav-links {
                 position: fixed;
@@ -477,8 +491,7 @@
             <div class="container">
                 <div class="service-grid">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1677442136019-21780ecad995?w=800&q=80"
-                            alt="AI Automation" loading="lazy">
+                        <img src="assets/img/ai.png" alt="AI Automation" loading="lazy">
                     </div>
                     <div class="service-text">
                         <h2>AI Automation</h2>
@@ -529,8 +542,7 @@
                         </button>
                     </div>
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=800&q=80"
-                            alt="API Integration" loading="lazy">
+                        <img src="assets/img/api.png" alt="API Integration" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -541,8 +553,7 @@
             <div class="container">
                 <div class="service-grid">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&q=80"
-                            alt="Cloud & DevOps" loading="lazy">
+                        <img src="assets/img/cl.png" alt="Cloud & DevOps" loading="lazy">
                     </div>
                     <div class="service-text">
                         <h2>Cloud & DevOps</h2>
@@ -593,8 +604,7 @@
                         </button>
                     </div>
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80"
-                            alt="Performance Optimization" loading="lazy">
+                        <img src="assets/img/po.png" alt="Performance Optimization" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -605,8 +615,7 @@
             <div class="container">
                 <div class="service-grid">
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1561070791-2526d30994b5?w=800&q=80"
-                            alt="UI/UX & Branding" loading="lazy">
+                        <img src="assets/img/ui.png" alt="UI/UX & Branding" loading="lazy">
                     </div>
                     <div class="service-text">
                         <h2>UI/UX & Branding</h2>
@@ -657,8 +666,7 @@
                         </button>
                     </div>
                     <div class="service-image">
-                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800&q=80"
-                            alt="Web Development" loading="lazy">
+                        <img src="assets/img/web.png" alt="Web Development" loading="lazy">
                     </div>
                 </div>
             </div>
@@ -712,9 +720,11 @@
         <div class="container">
             <div class="footer-grid">
                 <div class="footer-section">
-                    <h4>Techscale</h4>
-                    <p>Scale Without Limits.<br><br>Engineering solutions for teams that need infrastructure to work,
-                        not just exist.</p>
+                    <div class="footer-logo">
+                        <img src="assets/img/logo.png" alt="Techscale">
+                    </div>
+                    <p>Scale Without Limits.<br><br>Enterprise infrastructure solutions designed for reliability at any
+                        scale.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Services</h4>
